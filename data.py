@@ -1,4 +1,4 @@
-from pprint import pprint
+import json
 
 city_data = []
 criteria_data = []
@@ -30,4 +30,5 @@ with open('data.csv', 'r') as f:
             'data': row_data
         })
 
-pprint(city_data)
+with open('data.json', 'w') as f:
+    f.write(json.dumps(city_data))
