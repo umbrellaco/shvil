@@ -9,4 +9,15 @@
 body, html {
     margin: 0;
     padding: 0;
+    background: #ddd;
 }
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 320px;
+    left: 0;
+}
+
+
