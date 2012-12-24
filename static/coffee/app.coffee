@@ -1,3 +1,5 @@
+root = exports ? this
+
 cities = [
     {
         "geometry": {
@@ -8,7 +10,7 @@ cities = [
             ]
         },
         "properties": {
-            "name": "חיפה",
+            "title": "חיפה",
             "id": 1
         }
     },
@@ -21,7 +23,7 @@ cities = [
             ]
         },
         "properties": {
-            "name": "אשדוד",
+            "title": "אשדוד",
             "id": 14
         }
     },
@@ -34,7 +36,7 @@ cities = [
             ]
         },
         "properties": {
-            "name": "באר שבע",
+            "title": "באר שבע",
             "id": 8
         }
     },
@@ -47,7 +49,7 @@ cities = [
             ]
         },
         "properties": {
-            "name": "כפר סבא",
+            "title": "כפר סבא",
             "id": 5
         }
     },
@@ -60,7 +62,7 @@ cities = [
             ]
         },
         "properties": {
-            "name": "רמת גן",
+            "title": "רמת גן",
             "id": 11
         }
     },
@@ -73,7 +75,7 @@ cities = [
             ]
         },
         "properties": {
-            "name": "חולון",
+            "title": "חולון",
             "id": 1
         }
     },
@@ -86,7 +88,7 @@ cities = [
             ]
         },
         "properties": {
-            "name": "תל אביב-יפו",
+            "title": "תל אביב-יפו",
             "id": 3
         }
     },
@@ -99,7 +101,7 @@ cities = [
             ]
         },
         "properties": {
-            "name": "חדרה",
+            "title": "חדרה",
             "id": 6
         }
     },
@@ -112,7 +114,7 @@ cities = [
             ]
         },
         "properties": {
-            "name": "רעננה",
+            "title": "רעננה",
             "id": 10
         }
     },
@@ -125,7 +127,7 @@ cities = [
             ]
         },
         "properties": {
-            "name": "ראשון לציון",
+            "title": "ראשון לציון",
             "id": 7
         }
     },
@@ -138,7 +140,7 @@ cities = [
             ]
         },
         "properties": {
-            "name": "ירושלים",
+            "title": "ירושלים",
             "id": 2
         }
     },
@@ -151,7 +153,7 @@ cities = [
             ]
         },
         "properties": {
-            "name": "גבעתיים",
+            "title": "גבעתיים",
             "id": 16
         }
     },
@@ -164,7 +166,7 @@ cities = [
             ]
         },
         "properties": {
-            "name": "רחובות",
+            "title": "רחובות",
             "id": 15
         }
     },
@@ -177,7 +179,7 @@ cities = [
             ]
         },
         "properties": {
-            "name": "פתח תקווה",
+            "title": "פתח תקווה",
             "id": 13
         }
     },
@@ -190,7 +192,7 @@ cities = [
             ]
         },
         "properties": {
-            "name": "נתניה",
+            "title": "נתניה",
             "id": 9
         }
     },
@@ -203,24 +205,37 @@ cities = [
             ]
         },
         "properties": {
-            "name": "הרצליה",
+            "title": "הרצליה",
             "id": 12
         }
     }
 ]
 
 $ ->
-    map = mapbox.map('map')
-    map.addTileLayer(mapbox.layer().id('idan.map-468vpvim'))
-    cityMarkerLayer = mapbox.markers.layer()
+    root.map = mapbox.map('map')
+
+    root.baseLayerLocalized = mapbox.layer().id('idan.map-468vpvim').composite(false)
+    root.baseLayerEnglish = mapbox.layer().id('idan.map-b25l9lse').composite(false)
+    map.addTileLayer(root.baseLayerLocalized)
+    map.addTileLayer(root.baseLayerEnglish.disable())
+    root.cityMarkerLayer = mapbox.markers.layer()
         .features(cities)
         .key((f) ->
             return f.properties.id
         )
+    mapbox.markers.interaction(cityMarkerLayer)
     map.addLayer(cityMarkerLayer)
     map.ui.zoomer.add()
     map.addCallback('drawn', (map) ->
         console.log(map.getExtent())
     )
     map.setExtent(cityMarkerLayer.extent())
+
+    root.localize = (localized) ->
+        if localized
+            root.baseLayerEnglish.disable()
+            root.baseLayerLocalized.enable()
+        else
+            root.baseLayerEnglish.enable()
+            root.baseLayerLocalized.disable()
 
