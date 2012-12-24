@@ -1,0 +1,9 @@
+*.sublime-project
+*.sublime-workspace
+*.pyc
+*.pyo
+*.ipynb
+.sass-cache
+.env
+experiments
+notes
