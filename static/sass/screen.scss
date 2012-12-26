@@ -1,6 +1,15 @@
 @import "normalize";
 @import "bourbon/bourbon";
 
+@include font-face($font-family: "Almoni",
+                   $file-path: "../fonts/almoni-dl-aaa-300",
+                   $weight: 300,
+                   $style: normal);
+
+@include font-face($font-family: "Almoni",
+                   $file-path: "../fonts/almoni-dl-aaa-700",
+                   $weight: 700,
+                   $style: normal);
 
 * {
     @include box-sizing(border-box);
@@ -12,7 +21,7 @@ body, html {
     background: #ddd;
 }
 
-#map {
+.map {
     position: absolute;
     top: 0;
     bottom: 0;
