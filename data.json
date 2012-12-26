@@ -155,7 +155,8 @@
                 "0"
             ]
         ],
-        "name": "חולון"
+        "name": "חולון",
+        "id": 1
     },
     {
         "website": "http://www.jerusalem.muni.il/jer_main/defaultnew.asp?lng=1",
@@ -313,7 +314,8 @@
                 "0"
             ]
         ],
-        "name": "ירושלים"
+        "name": "ירושלים",
+        "id": 2
     },
     {
         "website": "http://www.tel-aviv.gov.il/Hebrew/Index.asp",
@@ -471,7 +473,8 @@
                 "1"
             ]
         ],
-        "name": "תל אביב-יפו"
+        "name": "תל אביב-יפו",
+        "id": 3
     },
     {
         "website": "http://www.haifa.muni.il/haifa/Pages/haifa.aspx",
@@ -629,7 +632,8 @@
                 "0.5"
             ]
         ],
-        "name": "חיפה"
+        "name": "חיפה",
+        "id": 1
     },
     {
         "website": "http://www.kfar-saba.muni.il/",
@@ -787,7 +791,8 @@
                 "0"
             ]
         ],
-        "name": "כפר סבא"
+        "name": "כפר סבא",
+        "id": 5
     },
     {
         "website": "http://www.hadera.muni.il/",
@@ -945,7 +950,8 @@
                 "0"
             ]
         ],
-        "name": "חדרה"
+        "name": "חדרה",
+        "id": 6
     },
     {
         "website": "http://www.rishonlezion.muni.il/",
@@ -1103,7 +1109,8 @@
                 "0"
             ]
         ],
-        "name": "ראשון לציון"
+        "name": "ראשון לציון",
+        "id": 7
     },
     {
         "website": "http://www.beer-sheva.muni.il/openning.asp?Lang=1",
@@ -1261,7 +1268,8 @@
                 "0"
             ]
         ],
-        "name": "באר שבע"
+        "name": "באר שבע",
+        "id": 8
     },
     {
         "website": "http://www.netanya.muni.il/",
@@ -1419,7 +1427,8 @@
                 "1"
             ]
         ],
-        "name": "נתניה"
+        "name": "נתניה",
+        "id": 9
     },
     {
         "website": "http://www.raanana.muni.il/",
@@ -1577,7 +1586,8 @@
                 "0"
             ]
         ],
-        "name": "רעננה"
+        "name": "רעננה",
+        "id": 10
     },
     {
         "website": "http://www.ramat-gan.muni.il/",
@@ -1735,7 +1745,8 @@
                 "0"
             ]
         ],
-        "name": "רמת גן"
+        "name": "רמת גן",
+        "id": 11
     },
     {
         "website": "http://www.herzliya.muni.il/",
@@ -1893,7 +1904,8 @@
                 "0"
             ]
         ],
-        "name": "הרצליה"
+        "name": "הרצליה",
+        "id": 12
     },
     {
         "website": "http://www.petah-tikva.muni.il/",
@@ -2051,7 +2063,8 @@
                 "0"
             ]
         ],
-        "name": "פתח תקווה"
+        "name": "פתח תקווה",
+        "id": 13
     },
     {
         "website": "http://www.ashdod.muni.il/ResidentService/bitahon/Pages/mazavherum.aspx ",
@@ -2209,7 +2222,8 @@
                 "0"
             ]
         ],
-        "name": "אשדוד"
+        "name": "אשדוד",
+        "id": 14
     },
     {
         "website": "http://www.rehovot.muni.il/",
@@ -2367,7 +2381,8 @@
                 "0"
             ]
         ],
-        "name": "רחובות"
+        "name": "רחובות",
+        "id": 15
     },
     {
         "website": "http://www.givatayim.muni.il/Openning.asp?Lang=1",
@@ -2525,6 +2540,7 @@
                 "0"
             ]
         ],
-        "name": "גבעתיים"
+        "name": "גבעתיים",
+        "id": 16
     }
 ]
