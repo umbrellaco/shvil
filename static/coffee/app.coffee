@@ -211,7 +211,15 @@ cities = [
     }
 ]
 
+class City extends Backbone.Model
+    
+
 $ ->
+    israelExtent = new MM.Extent(33.6006300456776,   # north
+                                 33.9, # west
+                                 29.223819169667124, # south
+                                 36.1) # east
+
     root.map = mapbox.map('map')
 
     root.baseLayerLocalized = mapbox.layer().id('idan.map-468vpvim').composite(false)
@@ -229,7 +237,9 @@ $ ->
     map.addCallback('drawn', (map) ->
         console.log(map.getExtent())
     )
+    map.setPanLimits(israelExtent)
     map.setExtent(cityMarkerLayer.extent())
+
 
     root.localize = (localized) ->
         if localized
@@ -239,3 +249,5 @@ $ ->
             root.baseLayerEnglish.enable()
             root.baseLayerLocalized.disable()
 
+# Map extents:
+# {north: 33.6006300456776, south: 29.223819169667124, east: 35.824406078124994, west: 34.313785960937516}
