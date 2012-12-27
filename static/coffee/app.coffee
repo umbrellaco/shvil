@@ -212,7 +212,15 @@ cities = [
 ]
 
 class City extends Backbone.Model
-    
+    initialize = (@name, @website, @data) ->
+
+    score = (category, criteria) ->
+        return data[category][criteria]
+
+class Cities extends Backbone.Collection
+    model: City
+
+
 
 $ ->
     israelExtent = new MM.Extent(33.6006300456776,   # north
