@@ -1,8 +1,15 @@
 import json
-from pprint import pprint
 
 city_data = []
 criteria_data = []
+
+city_meta = {}
+with open('citymeta.json', 'r') as fp:
+    raw = json.load(fp, encoding='utf-8')
+    # have to clean up the encoding of the dict keys
+    for k, v in raw.items():
+        city_meta[unicode(k).encode('utf-8')] = v
+
 
 with open('data.csv', 'r') as f:
     data = [x for x in f]
@@ -20,20 +27,20 @@ with open('data.csv', 'r') as f:
             if cur_cat:
                 criteria_data.append({
                     'category': cur_cat,
-                    'fields': cur_fields
+                    'fields': cur_fields,
                 })
             cur_cat = cat
             cur_fields = []
         cur_fields.append(field)
     criteria_data.append({
         'category': cur_cat,
-        'fields': cur_fields
+        'fields': cur_fields,
     })
 
     for row in data[2:-2]:
         cells = row.split(',')
         website = cells[0]
-        city = cells[1]
+        city = unicode(cells[1].decode('utf-8')).encode('utf-8')
         values = cells[2:-6]
 
         row_data = []
@@ -45,11 +52,14 @@ with open('data.csv', 'r') as f:
 
         city_data.append({
             'name': city,
+            'id': city_meta[city]['id'],
+            'coordinates': city_meta[city]['coordinates'],
             'website': website,
             'data': row_data
         })
 
-with open('data.json', 'wb') as f:
-    f.write(json.dumps(city_data, indent=4))
-with open('guide.json', 'wb') as f:
-    f.write(json.dumps(criteria_data, indent=4))
+with open('data.json', 'wb') as fp:
+    json.dump(city_data, fp, indent=4, ensure_ascii=False)
+
+with open('guide.json', 'wb') as fp:
+    json.dump(criteria_data, fp, indent=4, ensure_ascii=False)

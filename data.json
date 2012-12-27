@@ -155,7 +155,12 @@
                 "0"
             ]
         ], 
-        "name": "\u05d7\u05d5\u05dc\u05d5\u05df"
+        "name": "חולון", 
+        "coordinates": [
+            34.787386, 
+            32.015832
+        ], 
+        "id": 1
     }, 
     {
         "website": "http://www.jerusalem.muni.il/jer_main/defaultnew.asp?lng=1", 
@@ -313,7 +318,12 @@
                 "0"
             ]
         ], 
-        "name": "\u05d9\u05e8\u05d5\u05e9\u05dc\u05d9\u05dd"
+        "name": "ירושלים", 
+        "coordinates": [
+            35.213711, 
+            31.768318
+        ], 
+        "id": 2
     }, 
     {
         "website": "http://www.tel-aviv.gov.il/Hebrew/Index.asp", 
@@ -471,7 +481,12 @@
                 "1"
             ]
         ], 
-        "name": "\u05ea\u05dc \u05d0\u05d1\u05d9\u05d1-\u05d9\u05e4\u05d5"
+        "name": "תל אביב-יפו", 
+        "coordinates": [
+            34.777821, 
+            32.066157
+        ], 
+        "id": 3
     }, 
     {
         "website": "http://www.haifa.muni.il/haifa/Pages/haifa.aspx", 
@@ -629,7 +644,12 @@
                 "0.5"
             ]
         ], 
-        "name": "\u05d7\u05d9\u05e4\u05d4"
+        "name": "חיפה", 
+        "coordinates": [
+            34.974339, 
+            32.83036
+        ], 
+        "id": 1
     }, 
     {
         "website": "http://www.kfar-saba.muni.il/", 
@@ -787,7 +807,12 @@
                 "0"
             ]
         ], 
-        "name": "\u05db\u05e4\u05e8 \u05e1\u05d1\u05d0"
+        "name": "כפר סבא", 
+        "coordinates": [
+            34.907612, 
+            32.178194
+        ], 
+        "id": 5
     }, 
     {
         "website": "http://www.hadera.muni.il/", 
@@ -945,7 +970,12 @@
                 "0"
             ]
         ], 
-        "name": "\u05d7\u05d3\u05e8\u05d4"
+        "name": "חדרה", 
+        "coordinates": [
+            34.92088, 
+            32.442784
+        ], 
+        "id": 6
     }, 
     {
         "website": "http://www.rishonlezion.muni.il/", 
@@ -1103,7 +1133,12 @@
                 "0"
             ]
         ], 
-        "name": "\u05e8\u05d0\u05e9\u05d5\u05df \u05dc\u05e6\u05d9\u05d5\u05df"
+        "name": "ראשון לציון", 
+        "coordinates": [
+            34.80705, 
+            31.961544
+        ], 
+        "id": 7
     }, 
     {
         "website": "http://www.beer-sheva.muni.il/openning.asp?Lang=1", 
@@ -1261,7 +1296,12 @@
                 "0"
             ]
         ], 
-        "name": "\u05d1\u05d0\u05e8 \u05e9\u05d1\u05e2"
+        "name": "באר שבע", 
+        "coordinates": [
+            34.791464, 
+            31.252972
+        ], 
+        "id": 8
     }, 
     {
         "website": "http://www.netanya.muni.il/", 
@@ -1419,7 +1459,12 @@
                 "1"
             ]
         ], 
-        "name": "\u05e0\u05ea\u05e0\u05d9\u05d4"
+        "name": "נתניה", 
+        "coordinates": [
+            34.853197, 
+            32.321457
+        ], 
+        "id": 9
     }, 
     {
         "website": "http://www.raanana.muni.il/", 
@@ -1577,7 +1622,12 @@
                 "0"
             ]
         ], 
-        "name": "\u05e8\u05e2\u05e0\u05e0\u05d4"
+        "name": "רעננה", 
+        "coordinates": [
+            34.871328, 
+            32.18478
+        ], 
+        "id": 10
     }, 
     {
         "website": "http://www.ramat-gan.muni.il/", 
@@ -1735,7 +1785,12 @@
                 "0"
             ]
         ], 
-        "name": "\u05e8\u05de\u05ea \u05d2\u05df"
+        "name": "רמת גן", 
+        "coordinates": [
+            34.824787, 
+            32.068423
+        ], 
+        "id": 11
     }, 
     {
         "website": "http://www.herzliya.muni.il/", 
@@ -1893,7 +1948,12 @@
                 "0"
             ]
         ], 
-        "name": "\u05d4\u05e8\u05e6\u05dc\u05d9\u05d4"
+        "name": "הרצליה", 
+        "coordinates": [
+            34.844677, 
+            32.162412
+        ], 
+        "id": 12
     }, 
     {
         "website": "http://www.petah-tikva.muni.il/", 
@@ -2051,7 +2111,12 @@
                 "0"
             ]
         ], 
-        "name": "\u05e4\u05ea\u05d7 \u05ea\u05e7\u05d5\u05d5\u05d4"
+        "name": "פתח תקווה", 
+        "coordinates": [
+            34.887764, 
+            32.08404
+        ], 
+        "id": 13
     }, 
     {
         "website": "http://www.ashdod.muni.il/ResidentService/bitahon/Pages/mazavherum.aspx ", 
@@ -2209,7 +2274,12 @@
                 "0"
             ]
         ], 
-        "name": "\u05d0\u05e9\u05d3\u05d5\u05d3"
+        "name": "אשדוד", 
+        "coordinates": [
+            34.655316, 
+            31.80438
+        ], 
+        "id": 14
     }, 
     {
         "website": "http://www.rehovot.muni.il/", 
@@ -2367,7 +2437,12 @@
                 "0"
             ]
         ], 
-        "name": "\u05e8\u05d7\u05d5\u05d1\u05d5\u05ea"
+        "name": "רחובות", 
+        "coordinates": [
+            34.811274, 
+            31.89277199999999
+        ], 
+        "id": 15
     }, 
     {
         "website": "http://www.givatayim.muni.il/Openning.asp?Lang=1", 
@@ -2525,6 +2600,11 @@
                 "0"
             ]
         ], 
-        "name": "\u05d2\u05d1\u05e2\u05ea\u05d9\u05d9\u05dd"
+        "name": "גבעתיים", 
+        "coordinates": [
+            34.808873, 
+            32.072175
+        ], 
+        "id": 16
     }
 ]
