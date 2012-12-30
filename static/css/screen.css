@@ -336,9 +336,17 @@ body, html {
   padding: 0;
   background: #ddd; }
 
-.map {
+#map {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 400px;
   left: 0; }
+
+#info {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 400px;
+  right: 0;
+  direction: rtl; }
