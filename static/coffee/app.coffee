@@ -2822,12 +2822,34 @@ root.data = [
     }
 ]
 
+
 class City extends Backbone.Model
+    _isInt: (n) ->
+        return (typeof(n) == 'number' &&
+                parseFloat(n) == parseInt(n, 10) &&
+                !isNaN(n))
+
+    _sum: (scores) ->
+        return _.reduce(scores, (memo, score) ->
+            return memo + score)
+
+    _average: (scores) ->
+        return @_sum(scores) / scores.length
+
+    categoryScores: (category) ->
+        return @get('data')[category]
+
+    categoryAverage: (category) ->
+        @_average(@categoryScores(category))
+
+    totalAverage: ->
+        @_sum(@_average(scores) for scores in @get('data'))
+
     score: (category, criteria) ->
         return @get('data')[category][criteria]
 
-    marker: ->
-        return {
+    marker: (category, criteria) ->
+        m = {
             geometry: {
                 type: 'Point',
                 coordinates: @get('coordinates'),
@@ -2837,6 +2859,17 @@ class City extends Backbone.Model
                 id: @id
             }
         }
+
+        if @_isInt(criteria)
+            m['properties']['description'] = root.guide[category]['fields'][criteria]
+            m['properties']['value'] = @score(category, criteria)
+        else if @_isInt(category)
+            m['properties']['description'] = root.guide[category]['category']
+            m['properties']['value'] = @categoryAverage(category)
+        else # show overall score
+            m['properties']['description'] = @totalAverage()
+
+        return m
 
 
 class Cities extends Backbone.Collection
@@ -2882,11 +2915,20 @@ class MarkerLayer extends Backbone.View
         @render()
         @collection.on('all', =>
             @render())
+        @category = undefined
+        @criteria = undefined
+
+    setCriteria: (category, criteria) ->
+        @category = category
+        @criteria = criteria
 
     render: ->
-        markers = @collection.map((d) => return d.marker())
+        markers = @collection.map((d) ->
+            return d.marker(@category, @criteria))
         @layer.features(markers)
+        console.log(markers)
         return @
+
 
 
 

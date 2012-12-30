@@ -166,12 +166,49 @@
       return City.__super__.constructor.apply(this, arguments);
     }
 
+    City.prototype._isInt = function(n) {
+      return typeof n === 'number' && parseFloat(n) === parseInt(n, 10) && !isNaN(n);
+    };
+
+    City.prototype._sum = function(scores) {
+      return _.reduce(scores, function(memo, score) {
+        return memo + score;
+      });
+    };
+
+    City.prototype._average = function(scores) {
+      return this._sum(scores) / scores.length;
+    };
+
+    City.prototype.categoryScores = function(category) {
+      return this.get('data')[category];
+    };
+
+    City.prototype.categoryAverage = function(category) {
+      return this._average(this.categoryScores(category));
+    };
+
+    City.prototype.totalAverage = function() {
+      var scores;
+      return this._sum((function() {
+        var _i, _len, _ref, _results;
+        _ref = this.get('data');
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          scores = _ref[_i];
+          _results.push(this._average(scores));
+        }
+        return _results;
+      }).call(this));
+    };
+
     City.prototype.score = function(category, criteria) {
       return this.get('data')[category][criteria];
     };
 
-    City.prototype.marker = function() {
-      return {
+    City.prototype.marker = function(category, criteria) {
+      var m;
+      m = {
         geometry: {
           type: 'Point',
           coordinates: this.get('coordinates')
@@ -181,6 +218,16 @@
           id: this.id
         }
       };
+      if (this._isInt(criteria)) {
+        m['properties']['description'] = root.guide[category]['fields'][criteria];
+        m['properties']['value'] = this.score(category, criteria);
+      } else if (this._isInt(category)) {
+        m['properties']['description'] = root.guide[category]['category'];
+        m['properties']['value'] = this.categoryAverage(category);
+      } else {
+        m['properties']['description'] = this.totalAverage();
+      }
+      return m;
     };
 
     return City;
@@ -260,18 +307,25 @@
       });
       this.options.map.addLayer(this.layer);
       this.render();
-      return this.collection.on('all', function() {
+      this.collection.on('all', function() {
         return _this.render();
       });
+      this.category = void 0;
+      return this.criteria = void 0;
+    };
+
+    MarkerLayer.prototype.setCriteria = function(category, criteria) {
+      this.category = category;
+      return this.criteria = criteria;
     };
 
     MarkerLayer.prototype.render = function() {
-      var markers,
-        _this = this;
+      var markers;
       markers = this.collection.map(function(d) {
-        return d.marker();
+        return d.marker(this.category, this.criteria);
       });
       this.layer.features(markers);
+      console.log(markers);
       return this;
     };
 
