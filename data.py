@@ -15,7 +15,6 @@ with open('data.csv', 'r') as f:
     data = [x for x in f]
 
     categories = [cat for cat in data[0].split(',') if cat]
-    criteria = data[-1].split(',')[2:-6]
 
     criteria_counts = [6, 9, 6, 3, 7, 3, 5, 15, 5, 5, 5, 6, 2, 8, 3, 2, 8, 7, 13, 4]
 
