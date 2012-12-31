@@ -1,3 +1,4 @@
+import csv
 import json
 
 city_data = []
@@ -12,16 +13,20 @@ with open('citymeta.json', 'r') as fp:
 
 
 with open('data.csv', 'r') as f:
-    data = [x for x in f]
+    dr = csv.reader(f, delimiter=',', quotechar='"')
+    data = [x for x in dr]
 
-    categories = [cat for cat in data[0].split(',') if cat]
+    categories = [cat for cat in data[0] if cat]
 
     criteria_counts = [6, 9, 6, 3, 7, 3, 5, 15, 5, 5, 5, 6, 2, 8, 3, 2, 8, 7, 13, 4]
 
     cur_cat = None
     cur_fields = []
-    pairs = zip(data[0].split(','), data[1].split(','))[2:]
+    pairs = zip(data[0], data[1])[2:]
     for cat, field in pairs:
+        if field[0] == '"' and field[-1] == '"':
+            print 'ack'
+            field = field[1:-1]
         if cat and cat != cur_cat:
             if cur_cat:
                 criteria_data.append({
@@ -37,7 +42,7 @@ with open('data.csv', 'r') as f:
     })
 
     for row in data[2:]:
-        cells = row.split(',')
+        cells = row
         website = cells[0]
         city = unicode(cells[1].decode('utf-8')).encode('utf-8')
         values = cells[2:]
