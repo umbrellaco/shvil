@@ -24,9 +24,7 @@ with open('data.csv', 'r') as f:
     cur_fields = []
     pairs = zip(data[0], data[1])[2:]
     for cat, field in pairs:
-        if field[0] == '"' and field[-1] == '"':
-            print 'ack'
-            field = field[1:-1]
+        field = field.strip()
         if cat and cat != cur_cat:
             if cur_cat:
                 criteria_data.append({
