@@ -17,11 +17,11 @@ with open('data.csv', 'r') as f:
     categories = [cat for cat in data[0].split(',') if cat]
     criteria = data[-1].split(',')[2:-6]
 
-    criteria_counts = [23, 3, 16, 15, 6, 6, 13, 11, 2, 8, 20, 5]
+    criteria_counts = [6, 9, 6, 3, 7, 3, 5, 15, 5, 5, 5, 6, 2, 8, 3, 2, 8, 7, 13, 4]
 
     cur_cat = None
     cur_fields = []
-    pairs = zip(data[0].split(','), data[1].split(','))[2:-6]
+    pairs = zip(data[0].split(','), data[1].split(','))[2:]
     for cat, field in pairs:
         if cat and cat != cur_cat:
             if cur_cat:
@@ -37,11 +37,13 @@ with open('data.csv', 'r') as f:
         'fields': cur_fields,
     })
 
-    for row in data[2:-2]:
+    for row in data[2:]:
         cells = row.split(',')
         website = cells[0]
-        city = unicode(cells[1].decode('utf-8')).encode('utf-8')
-        values = cells[2:-6]
+        # city = unicode(cells[1].decode('utf-8')).encode('utf-8')
+        print city_meta
+        city = cells[1]
+        values = cells[2:]
 
         row_data = []
 
