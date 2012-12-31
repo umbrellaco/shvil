@@ -40,9 +40,7 @@ with open('data.csv', 'r') as f:
     for row in data[2:]:
         cells = row.split(',')
         website = cells[0]
-        # city = unicode(cells[1].decode('utf-8')).encode('utf-8')
-        print city_meta
-        city = cells[1]
+        city = unicode(cells[1].decode('utf-8')).encode('utf-8')
         values = cells[2:]
 
         row_data = []
