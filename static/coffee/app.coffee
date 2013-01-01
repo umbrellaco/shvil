@@ -2822,8 +2822,9 @@ root.data = [
     }
 ]
 
-root.red = d3.rgb('#dc143c')
-root.blue = d3.rgb('#1433dc')
+
+root.red = d3.rgb('#ba3047')
+root.blue = d3.rgb('#3d73b9')
 root.rdbu = d3.interpolateLab(root.redrgb, root.bluergb)
 
 _.templateSettings = {
@@ -2984,8 +2985,11 @@ root.cities = new Cities(_.map(data, (d) -> return new City(d)))
 
 root.tryScale = (scale) ->
     $('.swatch.a').css('background-color', scale(0))
-    $('.swatch.b').css('background-color', scale(0.5))
-    $('.swatch.c').css('background-color', scale(1))
+    $('.swatch.b').css('background-color', scale(0.25))
+    $('.swatch.c').css('background-color', scale(0.5))
+    $('.swatch.d').css('background-color', scale(0.75))
+    $('.swatch.e').css('background-color', scale(1))
+
 
 root.interpLab = (lowColor, highColor) ->
     scale = d3.interpolateLab(lowColor, highColor)
@@ -3000,4 +3004,4 @@ $ ->
     root.ml = new MarkerLayer({collection: root.cities, map: cm.map})
     root.cl = new CityList({collection: root.cities})
 
-    root.interpLab(root.redrgb, root.bluergb)
+    root.interpLab(root.red, root.blue)

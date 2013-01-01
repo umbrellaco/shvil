@@ -158,9 +158,9 @@
     }
   ];
 
-  root.red = d3.rgb('#dc143c');
+  root.red = d3.rgb('#ba3047');
 
-  root.blue = d3.rgb('#1433dc');
+  root.blue = d3.rgb('#3d73b9');
 
   root.rdbu = d3.interpolateLab(root.redrgb, root.bluergb);
 
@@ -430,8 +430,10 @@
 
   root.tryScale = function(scale) {
     $('.swatch.a').css('background-color', scale(0));
-    $('.swatch.b').css('background-color', scale(0.5));
-    return $('.swatch.c').css('background-color', scale(1));
+    $('.swatch.b').css('background-color', scale(0.25));
+    $('.swatch.c').css('background-color', scale(0.5));
+    $('.swatch.d').css('background-color', scale(0.75));
+    return $('.swatch.e').css('background-color', scale(1));
   };
 
   root.interpLab = function(lowColor, highColor) {
@@ -455,7 +457,7 @@
     root.cl = new CityList({
       collection: root.cities
     });
-    return root.interpLab(root.redrgb, root.bluergb);
+    return root.interpLab(root.red, root.blue);
   });
 
 }).call(this);

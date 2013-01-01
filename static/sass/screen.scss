@@ -22,7 +22,8 @@
                    $style: normal);
 
 
-$color-primary: #0071BC;
+$color-primary: #3d73b9;
+$color-red: #ba3047;
 
 * {
     @include box-sizing(border-box);
@@ -65,6 +66,10 @@ body, html {
             padding: 0;
             color: $color-primary;
             font-weight: bold;
+            letter-spacing: -1px;
+            .numerals {
+                letter-spacing: -5px;
+            }
         }
         h2 {
             font-size: 1.25em;
@@ -72,15 +77,19 @@ body, html {
             font-weight: 400;
             color: #bbb;
             border-bottom: 1px solid #ddd;
-
         }
     }
 }
 
+
+.swatches {
+    text-align: center;
+}
+
 .swatch {
     border: 1px solid #888;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     display: inline-block;
 }
 

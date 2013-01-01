@@ -377,8 +377,11 @@ body, html {
       line-height: 1em;
       margin: 0;
       padding: 0;
-      color: #0071bc;
-      font-weight: bold; }
+      color: #3d73b9;
+      font-weight: bold;
+      letter-spacing: -1px; }
+      #info header h1 .numerals {
+        letter-spacing: -5px; }
     #info header h2 {
       font-size: 1.25em;
       padding-bottom: 0.5em;
@@ -386,8 +389,11 @@ body, html {
       color: #bbb;
       border-bottom: 1px solid #ddd; }
 
+.swatches {
+  text-align: center; }
+
 .swatch {
   border: 1px solid #888;
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   display: inline-block; }
