@@ -365,10 +365,12 @@ body, html {
   bottom: 0;
   left: 400px;
   right: 0;
-  direction: rtl; }
+  direction: rtl;
+  padding: 1em; }
   #info header {
     text-align: center;
-    padding: 1em; }
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #ddd; }
     #info header h1, #info header h2 {
       margin: 0;
       padding: 0; }
@@ -384,10 +386,8 @@ body, html {
         letter-spacing: -5px; }
     #info header h2 {
       font-size: 1.25em;
-      padding-bottom: 0.5em;
       font-weight: 400;
-      color: #bbb;
-      border-bottom: 1px solid #ddd; }
+      color: #bbb; }
 
 .swatches {
   text-align: center; }
