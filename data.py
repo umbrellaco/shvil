@@ -49,7 +49,7 @@ with open('data.csv', 'r') as f:
 
         count = 0
         for c in criteria_counts:
-            row_data.append(values[count:count + c])
+            row_data.append([float(v) for v in values[count:count + c]])
             count += c
 
         city_data.append({
