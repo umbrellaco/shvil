@@ -2897,7 +2897,6 @@ class City extends Backbone.Model
             m['properties']['value'] = @totalAverage()
             m['properties']['marker-color'] = rdbu(scoreGrades(m['properties']['value']))
 
-        
         return m
 
 
@@ -2939,7 +2938,6 @@ class MarkerLayer extends Backbone.View
     initialize: ->
         @layer = mapbox.markers.layer()
         mapbox.markers.interaction(@layer)
-        @layer.key((d) -> return d.properties.id)
         @options.map.addLayer(@layer)
         @render()
         @collection.on('all', => @render())
@@ -2947,13 +2945,20 @@ class MarkerLayer extends Backbone.View
         @criteria = undefined
 
     setCriteria: (category, criteria) ->
+        ###
+        Set the criteria used for generating markers.
+        Call in one of three forms:
+        setCriteria(): resets to the global city average
+        setCriteria(category): markers represent the category average
+        setCriteria(category, criteria): markers show the specific criteria score
+        ###
         @category = category
         @criteria = criteria
+        @render()
 
     render: ->
-        markers = @collection.map((d) ->
-            return d.marker(@category, @criteria))
-        @layer.features(markers)
+        @layer.features(@collection.map((d) =>
+            return d.marker(@category, @criteria)))
         return @
 
 class CityList extends Backbone.View
