@@ -2,14 +2,27 @@
 @import "bourbon/bourbon";
 
 @include font-face($font-family: "Almoni",
-                   $file-path: "../fonts/almoni-dl-aaa-300",
+                   $file-path: "/static/fonts/almoni-dl-aaa-300",
                    $weight: 300,
                    $style: normal);
 
 @include font-face($font-family: "Almoni",
-                   $file-path: "../fonts/almoni-dl-aaa-700",
+                   $file-path: "/static/fonts/almoni-dl-aaa-700",
                    $weight: 700,
                    $style: normal);
+
+@include font-face($font-family: "Alef",
+                   $file-path: "/static/fonts/Alef-regular",
+                   $weight: 400,
+                   $style: normal);
+
+@include font-face($font-family: "Alef",
+                   $file-path: "/static/fonts/Alef-bold",
+                   $weight: 700,
+                   $style: normal);
+
+
+$color-primary: #0071BC;
 
 * {
     @include box-sizing(border-box);
@@ -18,7 +31,8 @@
 body, html {
     margin: 0;
     padding: 0;
-    background: #ddd;
+    background: #fff;
+    font-family: Alef, sans-serif;
 }
 
 #map {
@@ -27,6 +41,7 @@ body, html {
     bottom: 0;
     width: 400px;
     left: 0;
+    background: #ddd;
 }
 
 #info {
@@ -36,6 +51,37 @@ body, html {
     left: 400px;
     right: 0;
     direction: rtl;
+    header {
+        text-align: center;
+        padding: 1em;
+        h1, h2 {
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 4em;
+            line-height: 1em;
+            margin: 0;
+            padding: 0;
+            color: $color-primary;
+            font-weight: bold;
+        }
+        h2 {
+            font-size: 1.25em;
+            padding-bottom: 0.5em;
+            font-weight: 400;
+            color: #bbb;
+            border-bottom: 1px solid #ddd;
+
+        }
+    }
+}
+
+.swatch {
+    border: 1px solid #888;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
 }
 
 

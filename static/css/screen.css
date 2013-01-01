@@ -316,15 +316,29 @@ table {
   font-family: "Almoni";
   font-weight: 300;
   font-style: normal;
-  src: url("../fonts/almoni-dl-aaa-300.eot");
-  src: url("../fonts/almoni-dl-aaa-300.eot?#iefix") format("embedded-opentype"), url("../fonts/almoni-dl-aaa-300.woff") format("woff"), url("../fonts/almoni-dl-aaa-300.ttf") format("truetype"), url("../fonts/almoni-dl-aaa-300.svg#Almoni") format("svg"); }
+  src: url("/static/fonts/almoni-dl-aaa-300.eot");
+  src: url("/static/fonts/almoni-dl-aaa-300.eot?#iefix") format("embedded-opentype"), url("/static/fonts/almoni-dl-aaa-300.woff") format("woff"), url("/static/fonts/almoni-dl-aaa-300.ttf") format("truetype"), url("/static/fonts/almoni-dl-aaa-300.svg#Almoni") format("svg"); }
 
 @font-face {
   font-family: "Almoni";
   font-weight: 700;
   font-style: normal;
-  src: url("../fonts/almoni-dl-aaa-700.eot");
-  src: url("../fonts/almoni-dl-aaa-700.eot?#iefix") format("embedded-opentype"), url("../fonts/almoni-dl-aaa-700.woff") format("woff"), url("../fonts/almoni-dl-aaa-700.ttf") format("truetype"), url("../fonts/almoni-dl-aaa-700.svg#Almoni") format("svg"); }
+  src: url("/static/fonts/almoni-dl-aaa-700.eot");
+  src: url("/static/fonts/almoni-dl-aaa-700.eot?#iefix") format("embedded-opentype"), url("/static/fonts/almoni-dl-aaa-700.woff") format("woff"), url("/static/fonts/almoni-dl-aaa-700.ttf") format("truetype"), url("/static/fonts/almoni-dl-aaa-700.svg#Almoni") format("svg"); }
+
+@font-face {
+  font-family: "Alef";
+  font-weight: 400;
+  font-style: normal;
+  src: url("/static/fonts/Alef-regular.eot");
+  src: url("/static/fonts/Alef-regular.eot?#iefix") format("embedded-opentype"), url("/static/fonts/Alef-regular.woff") format("woff"), url("/static/fonts/Alef-regular.ttf") format("truetype"), url("/static/fonts/Alef-regular.svg#Alef") format("svg"); }
+
+@font-face {
+  font-family: "Alef";
+  font-weight: 700;
+  font-style: normal;
+  src: url("/static/fonts/Alef-bold.eot");
+  src: url("/static/fonts/Alef-bold.eot?#iefix") format("embedded-opentype"), url("/static/fonts/Alef-bold.woff") format("woff"), url("/static/fonts/Alef-bold.ttf") format("truetype"), url("/static/fonts/Alef-bold.svg#Alef") format("svg"); }
 
 * {
   -webkit-box-sizing: border-box;
@@ -334,14 +348,16 @@ table {
 body, html {
   margin: 0;
   padding: 0;
-  background: #ddd; }
+  background: #fff;
+  font-family: Alef, sans-serif; }
 
 #map {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 400px;
-  left: 0; }
+  left: 0;
+  background: #ddd; }
 
 #info {
   position: absolute;
@@ -350,3 +366,28 @@ body, html {
   left: 400px;
   right: 0;
   direction: rtl; }
+  #info header {
+    text-align: center;
+    padding: 1em; }
+    #info header h1, #info header h2 {
+      margin: 0;
+      padding: 0; }
+    #info header h1 {
+      font-size: 4em;
+      line-height: 1em;
+      margin: 0;
+      padding: 0;
+      color: #0071bc;
+      font-weight: bold; }
+    #info header h2 {
+      font-size: 1.25em;
+      padding-bottom: 0.5em;
+      font-weight: 400;
+      color: #bbb;
+      border-bottom: 1px solid #ddd; }
+
+.swatch {
+  border: 1px solid #888;
+  width: 100px;
+  height: 100px;
+  display: inline-block; }
