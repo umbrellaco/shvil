@@ -2822,6 +2822,13 @@ root.data = [
     }
 ]
 
+root.red = d3.rgb('#dc143c')
+root.blue = d3.rgb('#1433dc')
+root.rdbu = d3.interpolateLab(root.redrgb, root.bluergb)
+
+_.templateSettings = {
+  interpolate : /\{\{(.+?)\}\}/g
+}
 
 class City extends Backbone.Model
     _isInt: (n) ->
@@ -2840,10 +2847,16 @@ class City extends Backbone.Model
         return @get('data')[category]
 
     categoryAverage: (category) ->
-        @_average(@categoryScores(category))
+        return @_average(@categoryScores(category))
+
+    total: ->
+        return @_sum(@get('data'))
 
     totalAverage: ->
-        @_sum(@_average(scores) for scores in @get('data'))
+        return @_sum(@_average(scores) for scores in @get('data'))
+
+    totalMax: ->
+        return @_sum(_.map(@get('data'), (d) -> return d.length))
 
     score: (category, criteria) ->
         return @get('data')[category][criteria]
@@ -2913,8 +2926,7 @@ class MarkerLayer extends Backbone.View
         @layer.key((d) -> return d.properties.id)
         @options.map.addLayer(@layer)
         @render()
-        @collection.on('all', =>
-            @render())
+        @collection.on('all', => @render())
         @category = undefined
         @criteria = undefined
 
@@ -2926,7 +2938,37 @@ class MarkerLayer extends Backbone.View
         markers = @collection.map((d) ->
             return d.marker(@category, @criteria))
         @layer.features(markers)
-        console.log(markers)
+        return @
+
+class CityList extends Backbone.View
+    tagName: 'ul'
+    class: 'city_list'
+
+    initialize: ->
+        @render()
+        @collection.on('all', =>
+            @render())
+
+    render: ->
+        @collection.each((city) =>
+            # console.log(city)
+            c = new CityListItem({model: city})
+            # @$el.append(c.render)
+        )
+        $('#content').html(@el)
+        return @
+
+
+class CityListItem extends Backbone.View
+    tagName: 'li'
+    class: 'city_listitem'
+
+    initialize: ->
+        @model.on('all', => @render())
+        @render()
+
+    render: ->
+        # @$el.html("#{@model.get('name')} (#{@model.total()}/#{@model.totalMax()})")
         return @
 
 
@@ -2940,6 +2982,22 @@ root.Cities = Cities
 root.cities = new Cities(_.map(data, (d) -> return new City(d)))
 
 
+root.tryScale = (scale) ->
+    $('.swatch.a').css('background-color', scale(0))
+    $('.swatch.b').css('background-color', scale(0.5))
+    $('.swatch.c').css('background-color', scale(1))
+
+root.interpLab = (lowColor, highColor) ->
+    scale = d3.interpolateLab(lowColor, highColor)
+    tryScale(scale)
+
+root.interpRGB = (lowColor, highColor) ->
+    scale = d3.interpolateRgb(lowColor, highColor)
+    tryScale(scale)
+
 $ ->
     root.cm = new CityMap()
     root.ml = new MarkerLayer({collection: root.cities, map: cm.map})
+    root.cl = new CityList({collection: root.cities})
+
+    root.interpLab(root.redrgb, root.bluergb)
