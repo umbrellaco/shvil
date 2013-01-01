@@ -2879,15 +2879,18 @@ class City extends Backbone.Model
             }
         }
 
-        if @_isInt(criteria)
+        if @_isInt(criteria) and @_isInt(category)
             m['properties']['description'] = root.guide[category]['fields'][criteria]
             m['properties']['value'] = @score(category, criteria)
             m['properties']['marker-color'] = rdbu(m['properties']['value'])
+            m['properties']['data-category'] = category
+            m['properties']['data-criteria'] = criteria
 
         else if @_isInt(category)
             m['properties']['description'] = root.guide[category]['category']
             m['properties']['value'] = @categoryAverage(category)
             m['properties']['marker-color'] = rdbu(scoreGrades(m['properties']['value']))
+            m['properties']['data-category'] = category
 
         else # show overall score
             m['properties']['description'] = @totalAverage()
