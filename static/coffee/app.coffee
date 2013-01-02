@@ -2910,40 +2910,32 @@ israelExtent = new MM.Extent(33.6006300456776,   # north
                              29.223819169667124, # south
                              36.1) # east
 
-class CityMap extends Backbone.View
+class MapView extends Backbone.View
     el: $('#map')
 
     initialize: ->
+        @localizedLayer = mapbox.layer().id('idan.map-468vpvim').composite(false)
+        @englishLayer = mapbox.layer().id('idan.map-b25l9lse').composite(false)
+        @markerLayer = mapbox.markers.layer()
+        mapbox.markers.interaction(@markerLayer)
+        @category = undefined
+        @criteria = undefined
         @render()
 
     render: ->
         @map = mapbox.map(@el)
-        @baseLayerLocalized = mapbox.layer().id('idan.map-468vpvim').composite(false)
-        @baseLayerEnglish = mapbox.layer().id('idan.map-b25l9lse').composite(false)
-        @map.addTileLayer(@baseLayerLocalized)
-        @map.addTileLayer(@baseLayerEnglish.disable())
+        @map.addTileLayer(@localizedLayer)
+        @map.addTileLayer(@englishLayer.disable())
+        @map.addLayer(@markerLayer)
         @map.ui.zoomer.add()
         @map.setPanLimits(israelExtent)
         @map.setExtent(israelExtent)
+        @renderMarkers()
         return @
 
-    localize: (localized) ->
-        if localized
-            @baseLayerLocalized.enable()
-            @baseLayerEnglish.disable()
-        else
-            @baseLayerEnglish.enable()
-            @baseLayerLocalized.disable()
-
-class MarkerLayer extends Backbone.View
-    initialize: ->
-        @layer = mapbox.markers.layer()
-        mapbox.markers.interaction(@layer)
-        @options.map.addLayer(@layer)
-        @render()
-        @collection.on('all', => @render())
-        @category = undefined
-        @criteria = undefined
+    renderMarkers: ->
+        @markerLayer.features(@collection.map((d) =>
+            return d.marker(@category, @criteria)))
 
     setCriteria: (category, criteria) ->
         ###
@@ -2955,12 +2947,16 @@ class MarkerLayer extends Backbone.View
         ###
         @category = category
         @criteria = criteria
-        @render()
+        @renderMarkers()
 
-    render: ->
-        @layer.features(@collection.map((d) =>
-            return d.marker(@category, @criteria)))
-        return @
+    localize: (localized) ->
+        if localized
+            @localizedLayer.enable()
+            @englishLayer.disable()
+        else
+            @englishLayer.enable()
+            @localizedLayer.disable()
+
 
 class CityList extends Backbone.View
     el: $('#content')
@@ -3004,17 +3000,11 @@ class CityListItem extends Backbone.View
         return @
 
 
-
-
-root.data = data
-root.guide = guide
-root.City = City
-root.Cities = Cities
-
 root.cities = new Cities(_.map(data, (d) -> return new City(d)))
 
 
+
+
 $ ->
-    root.cm = new CityMap()
-    root.ml = new MarkerLayer({collection: root.cities, map: cm.map})
+    root.cm = new MapView({collection: root.cities})
     root.cl = new CityList({collection: root.cities})
