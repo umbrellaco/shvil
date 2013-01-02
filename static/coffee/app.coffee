@@ -2824,13 +2824,10 @@ root.data = [
 ]
 
 
-red = d3.rgb('#ba3047')
-blue = d3.rgb('#3d73b9')
-rdbu = d3.interpolateLab(red, blue)
-
-scoreGrades = d3.scale.quantile()
-                .domain([0, 0.5, 0.6, 1])
-                .range([0, 0.5, 1])
+# This scale is not really colorblind-safe.
+markerColorScale = d3.scale.quantile()
+                    .domain([0, 0.5, 0.6, 1])
+                    .range(["#C24444", "#EEB624", "#8DA709"])
 
 _.templateSettings = {
   interpolate : /\{\{(.+?)\}\}/g
@@ -2876,26 +2873,27 @@ class City extends Backbone.Model
             properties: {
                 title: @get('name')
                 id: @id
+                'marker-size': 'small'
             }
         }
 
         if @_isInt(criteria) and @_isInt(category)
             m['properties']['description'] = root.guide[category]['fields'][criteria]
             m['properties']['value'] = @score(category, criteria)
-            m['properties']['marker-color'] = rdbu(m['properties']['value'])
+            m['properties']['marker-color'] = markerColorScale(m['properties']['value'])
             m['properties']['data-category'] = category
             m['properties']['data-criteria'] = criteria
 
         else if @_isInt(category)
             m['properties']['description'] = root.guide[category]['category']
             m['properties']['value'] = @categoryAverage(category)
-            m['properties']['marker-color'] = rdbu(scoreGrades(m['properties']['value']))
+            m['properties']['marker-color'] = markerColorScale(m['properties']['value'])
             m['properties']['data-category'] = category
 
         else # show overall score
             m['properties']['description'] = @totalAverage()
             m['properties']['value'] = @totalAverage()
-            m['properties']['marker-color'] = rdbu(scoreGrades(m['properties']['value']))
+            m['properties']['marker-color'] = markerColorScale(m['properties']['value'])
 
         return m
 

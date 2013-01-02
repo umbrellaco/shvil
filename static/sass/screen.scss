@@ -22,8 +22,12 @@
                    $style: normal);
 
 
-$color-primary: #3d73b9;
-$color-red: #ba3047;
+$color-blue: #2C7FB8;
+$color-yellow: #EEB624;
+$color-red: #C24444;
+$color-green: #8DA709;
+
+$color-primary: $color-blue;
 
 * {
     @include box-sizing(border-box);
