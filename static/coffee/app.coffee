@@ -2829,6 +2829,13 @@ markerColorScale = d3.scale.quantile()
                     .domain([0, 0.5, 0.6, 1])
                     .range(["#C24444", "#EEB624", "#8DA709"])
 
+
+# Bounding box for Israel
+israelExtent = new MM.Extent(33.6006300456776,   # north
+                             33.9, # west
+                             29.223819169667124, # south
+                             36.1) # east
+
 _.templateSettings = {
   interpolate : /\{\{(.+?)\}\}/g
 }
@@ -2905,11 +2912,6 @@ class Cities extends Backbone.Collection
     model: City
 
 
-israelExtent = new MM.Extent(33.6006300456776,   # north
-                             33.9, # west
-                             29.223819169667124, # south
-                             36.1) # east
-
 class MapView extends Backbone.View
     el: $('#map')
 
@@ -2970,9 +2972,7 @@ class CityList extends Backbone.View
     render: ->
         content = ich.template_citylist()
         @collection.each((city) =>
-            console.log(city)
             c = new CityListItem({model: city})
-            console.log(c.render().el)
             $(content).children('ul').append(c.render().el)
         )
         @$el.html(content)
@@ -2999,8 +2999,8 @@ class CityListItem extends Backbone.View
         return @
 
 
-root.cities = new Cities(_.map(data, (d) -> return new City(d)))
-
+root.cities = new Cities()
+root.cities.reset(data)
 
 
 
