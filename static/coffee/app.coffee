@@ -2920,9 +2920,6 @@ class MapView extends Backbone.View
         mapbox.markers.interaction(@markerLayer)
         @category = undefined
         @criteria = undefined
-        @render()
-
-    render: ->
         @map = mapbox.map(@el)
         @map.addTileLayer(@localizedLayer)
         @map.addTileLayer(@englishLayer.disable())
@@ -2930,12 +2927,13 @@ class MapView extends Backbone.View
         @map.ui.zoomer.add()
         @map.setPanLimits(israelExtent)
         @map.setExtent(israelExtent)
-        @renderMarkers()
-        return @
+        @collection.on('all', => @render())
+        @render()
 
-    renderMarkers: ->
+    render: ->
         @markerLayer.features(@collection.map((d) =>
             return d.marker(@category, @criteria)))
+        return @
 
     setCriteria: (category, criteria) ->
         ###
