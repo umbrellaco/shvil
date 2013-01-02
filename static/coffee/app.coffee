@@ -2926,6 +2926,7 @@ class MapView extends Backbone.View
         @map.addLayer(@markerLayer)
         @map.ui.zoomer.add()
         @map.setPanLimits(israelExtent)
+        @map.setZoomRange(7,12)
         @map.setExtent(israelExtent)
         @collection.on('all', => @render())
         @render()
