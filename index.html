@@ -39,5 +39,18 @@
         <script src="static/js/backbone.js"></script>
         -->
         <script src="static/js/app.js"></script>
-    </body>
+
+
+
+        <script type="text/html" id="template_citylist">
+            <section class="citylist">
+                <h1>ערים</h1>
+                <ul></ul>
+            </section>
+        </script>
+
+        <script type="text/html" id="template_citylistitem">
+            <a href="" data-id="{{id}}">{{ name }} &middot; {{ score }}%</a>
+        </script>
+   </body>
 </html>

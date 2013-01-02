@@ -2858,6 +2858,9 @@ class City extends Backbone.Model
     totalAverage: ->
         return @total() / @totalMax()
 
+    totalAveragePercent: ->
+        return Math.round(@totalAverage() * 100.0)
+
     totalMax: ->
         return @_sum(_.map(@get('data'), (d) -> return d.length))
 
@@ -2960,21 +2963,25 @@ class MarkerLayer extends Backbone.View
         return @
 
 class CityList extends Backbone.View
-    tagName: 'ul'
-    class: 'city_list'
+    el: $('#content')
+    template: ich.template_citylist
 
     initialize: ->
+        _.bindAll(@)
         @render()
-        @collection.on('all', =>
-            @render())
+        # @collection.on('all', =>
+        #     @render())
 
     render: ->
+        content = ich.template_citylist()
         @collection.each((city) =>
-            # console.log(city)
+            console.log(city)
             c = new CityListItem({model: city})
-            # @$el.append(c.render)
+            console.log(c.render().el)
+            $(content).children('ul').append(c.render().el)
         )
-        $('#content').html(@el)
+        @$el.html(content)
+
         return @
 
 
@@ -2983,11 +2990,17 @@ class CityListItem extends Backbone.View
     class: 'city_listitem'
 
     initialize: ->
-        @model.on('all', => @render())
+        _.bindAll(@)
+        # @model.on('all', => @render())
         @render()
 
     render: ->
-        # @$el.html("#{@model.get('name')} (#{@model.total()}/#{@model.totalMax()})")
+        content = ich.template_citylistitem({
+            name: @model.get('name'),
+            score: @model.totalAveragePercent(),
+            id: @model.id,
+        })
+        @$el.html(content)
         return @
 
 
