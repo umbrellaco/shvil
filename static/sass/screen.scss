@@ -183,8 +183,9 @@ body, html {
                 color: $color-text;
                 margin: 0;
                 padding: 0.5em 1em 0.5em 0.5em;
-                font-size: 2em;
+                font-size: 1.75em;
                 width: 80%;
+                border-left: 1px solid white;
             }
             .grade {
                 position: absolute;
@@ -198,6 +199,7 @@ body, html {
                 margin: 0;
                 text-align: center;
                 padding: 1% 0;
+                border-right: 1px solid darken($color-green, 10%);
                 &.a {
                     background: $color-green;
                 }
