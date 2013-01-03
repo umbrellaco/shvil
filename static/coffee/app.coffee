@@ -2908,7 +2908,7 @@ $ ->
                 m['properties']['data-category'] = category
 
             else # show overall score
-                m['properties']['description'] = @totalAverage()
+                m['properties']['description'] = @totalAveragePercent() + '%'
                 m['properties']['value'] = @totalAverage()
                 m['properties']['marker-color'] = markerColorScale(m['properties']['value'])
 
