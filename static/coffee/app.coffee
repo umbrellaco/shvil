@@ -2827,11 +2827,11 @@ root.data = [
 # This scale is not really colorblind-safe.
 markerColorScale = d3.scale.quantile()
                     .domain([0, 0.5, 0.6, 1])
-                    .range(['#c22c2c', '#EEB624', '#8DA709'])
+                    .range(['#DA4F49', '#F89406', '#51A351'])
 
 markerClassScale = d3.scale.quantile()
                     .domain([0, 0.5, 0.6, 1])
-                    .range(['C', 'B', 'A'])
+                    .range(['c', 'b', 'a'])
 
 
 # Bounding box for Israel
