@@ -62,11 +62,10 @@ body, html {
     left: 400px;
     right: 0;
     direction: rtl;
-    padding: 1em;
+    padding: 0;
     header {
         text-align: center;
-        padding-bottom: 0.5em;
-        border-bottom : 1px solid #ddd;
+        padding: 1em;
         h1, h2 {
             margin: 0;
             padding: 0;
@@ -87,19 +86,25 @@ body, html {
             font-size: 1.25em;
             font-weight: 400;
             color: $color-text-light;
+            padding-bottom: 0.5em;
+            border-bottom : 1px solid #ddd;
+
+
+
         }
     }
 }
 
 #info {
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 .citylist {
     text-align: center;
     h1 {
         color: $color-primary;
-        margin-bottom: 0;
+        margin: 0;
     }
     p {
         margin: 0.25em auto 0.75em;
