@@ -2890,27 +2890,31 @@ $ ->
                 properties: {
                     title: @get('name')
                     id: @id
-                    'marker-size': 'small'
+                    'marker-size': 'medium'
                 }
             }
 
+            props = m['properties']
             if @_isInt(criteria) and @_isInt(category)
-                m['properties']['description'] = root.guide[category]['fields'][criteria]
-                m['properties']['value'] = @score(category, criteria)
-                m['properties']['marker-color'] = markerColorScale(m['properties']['value'])
-                m['properties']['data-category'] = category
-                m['properties']['data-criteria'] = criteria
+                props['description'] = root.guide[category]['fields'][criteria]
+                props['value'] = @score(category, criteria)
+                props['marker-color'] = markerColorScale(props['value'])
+                props['marker-symbol'] = markerClassScale(props['value'])
+                props['data-category'] = category
+                props['data-criteria'] = criteria
 
             else if @_isInt(category)
-                m['properties']['description'] = root.guide[category]['category']
-                m['properties']['value'] = @categoryAverage(category)
-                m['properties']['marker-color'] = markerColorScale(m['properties']['value'])
-                m['properties']['data-category'] = category
+                props['description'] = root.guide[category]['category']
+                props['value'] = @categoryAverage(category)
+                props['marker-color'] = markerColorScale(props['value'])
+                props['marker-symbol'] = markerClassScale(props['value'])
+                props['data-category'] = category
 
             else # show overall score
-                m['properties']['description'] = @totalAveragePercent() + '%'
-                m['properties']['value'] = @totalAverage()
-                m['properties']['marker-color'] = markerColorScale(m['properties']['value'])
+                props['description'] = @totalAveragePercent() + '%'
+                props['value'] = @totalAverage()
+                props['marker-color'] = markerColorScale(m['properties']['value'])
+                props['marker-symbol'] = markerClassScale(props['value'])
 
             return m
 
