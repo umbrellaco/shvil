@@ -2827,7 +2827,11 @@ root.data = [
 # This scale is not really colorblind-safe.
 markerColorScale = d3.scale.quantile()
                     .domain([0, 0.5, 0.6, 1])
-                    .range(["#C24444", "#EEB624", "#8DA709"])
+                    .range(['#c22c2c', '#EEB624', '#8DA709'])
+
+markerClassScale = d3.scale.quantile()
+                    .domain([0, 0.5, 0.6, 1])
+                    .range(['C', 'B', 'A'])
 
 
 # Bounding box for Israel
@@ -2988,7 +2992,7 @@ $ ->
 
     class CityListItemView extends Backbone.View
         tagName: 'li'
-        class: 'city_listitem'
+        className: 'citylistitem'
         template: _.template($('#template_citylistitem').html())
 
         initialize: ->
@@ -3002,6 +3006,7 @@ $ ->
                 score: @model.totalAveragePercent(),
                 id: @model.id,
             })
+            @$el.attr('data-class', markerClassScale(@model.totalAverage()))
             @$el.html(content)
             return @
 

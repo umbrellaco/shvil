@@ -24,7 +24,7 @@
 
 $color-blue: #2C7FB8;
 $color-yellow: #EEB624;
-$color-red: #C24444;
+$color-red: #c22c2c;
 $color-green: #8DA709;
 
 $color-primary: $color-blue;
@@ -91,6 +91,11 @@ body, html {
     text-align: center;
     h1 {
         color: $color-primary;
+        margin-bottom: 0;
+    }
+    p {
+        margin: 0.25em auto 0.75em;
+        color: #888;
     }
     ul {
         margin: 0;
@@ -98,19 +103,42 @@ body, html {
         list-style-type: none;
     }
 
-    a {
-        text-decoration: none;
-        color: $color-text;
-        font-size: 1.25em;
-        display: inline-block;
-        background: #ddd;
-        margin: 0.25em;
-        padding: 0 0.5em;
-        border-radius: 2px;
-        @include transition(all 0.15s ease);
-        &:hover {
-            background: $color-blue;
-            color: white;
+    .citylistitem {
+        a {
+            text-decoration: none;
+            color: $color-text;
+            font-size: 1.1em;
+            display: inline-block;
+            background-color: #ddd;
+            margin: 0.25em;
+            padding: 0 0.5em;
+            border-radius: 2px;
+            @include transition(all 0.15s ease);
+            &:hover {
+                background: $color-blue;
+                color: white;
+            }
+        }
+
+        @mixin dataclass($bg, $text:inherit) {
+            background-color: $bg;
+            color: $text;
+            border: 1px solid darken($bg, 12%);
+            @include box-shadow(0 1px 0 0 rgba(255,255,255,0.25) inset);
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+            &:hover {
+                background: lighten($bg, 10%);
+            }
+        }
+
+        &[data-class=A] a {
+            @include dataclass($color-green);
+        }
+        &[data-class=B] a {
+            @include dataclass($color-yellow);
+        }
+        &[data-class=C] a {
+            @include dataclass($color-red, white);
         }
     }
 }
