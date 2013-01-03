@@ -2840,170 +2840,187 @@ _.templateSettings = {
   interpolate : /\{\{(.+?)\}\}/g
 }
 
-class City extends Backbone.Model
-    _isInt: (n) ->
-        return (typeof(n) == 'number' &&
-                parseFloat(n) == parseInt(n, 10) &&
-                !isNaN(n))
-
-    _sum: (scores) ->
-        return _.reduce(scores, (memo, score) ->
-            return memo + score)
-
-    _average: (scores) ->
-        return @_sum(scores) / scores.length
-
-    categoryScores: (category) ->
-        return @get('data')[category]
-
-    categoryAverage: (category) ->
-        return @_average(@categoryScores(category))
-
-    total: ->
-        return @_sum(@_sum(scores) for scores in @get('data'))
-
-    totalAverage: ->
-        return @total() / @totalMax()
-
-    totalAveragePercent: ->
-        return Math.round(@totalAverage() * 100.0)
-
-    totalMax: ->
-        return @_sum(_.map(@get('data'), (d) -> return d.length))
-
-    score: (category, criteria) ->
-        return @get('data')[category][criteria]
-
-    marker: (category, criteria) ->
-        m = {
-            geometry: {
-                type: 'Point',
-                coordinates: @get('coordinates'),
-            },
-            properties: {
-                title: @get('name')
-                id: @id
-                'marker-size': 'small'
-            }
-        }
-
-        if @_isInt(criteria) and @_isInt(category)
-            m['properties']['description'] = root.guide[category]['fields'][criteria]
-            m['properties']['value'] = @score(category, criteria)
-            m['properties']['marker-color'] = markerColorScale(m['properties']['value'])
-            m['properties']['data-category'] = category
-            m['properties']['data-criteria'] = criteria
-
-        else if @_isInt(category)
-            m['properties']['description'] = root.guide[category]['category']
-            m['properties']['value'] = @categoryAverage(category)
-            m['properties']['marker-color'] = markerColorScale(m['properties']['value'])
-            m['properties']['data-category'] = category
-
-        else # show overall score
-            m['properties']['description'] = @totalAverage()
-            m['properties']['value'] = @totalAverage()
-            m['properties']['marker-color'] = markerColorScale(m['properties']['value'])
-
-        return m
-
-
-class Cities extends Backbone.Collection
-    model: City
-
-
-class MapView extends Backbone.View
-    el: $('#map')
-
-    initialize: ->
-        @localizedLayer = mapbox.layer().id('idan.map-468vpvim').composite(false)
-        @englishLayer = mapbox.layer().id('idan.map-b25l9lse').composite(false)
-        @markerLayer = mapbox.markers.layer()
-        mapbox.markers.interaction(@markerLayer)
-        @category = undefined
-        @criteria = undefined
-        @map = mapbox.map(@el)
-        @map.addTileLayer(@localizedLayer)
-        @map.addTileLayer(@englishLayer.disable())
-        @map.addLayer(@markerLayer)
-        @map.ui.zoomer.add()
-        @map.setPanLimits(israelExtent)
-        @map.setZoomRange(7,12)
-        @map.setExtent(israelExtent)
-        @collection.on('all', => @render())
-        @render()
-
-    render: ->
-        @markerLayer.features(@collection.map((d) =>
-            return d.marker(@category, @criteria)))
-        return @
-
-    setCriteria: (category, criteria) ->
-        ###
-        Set the criteria used for generating markers.
-        Call in one of three forms:
-        setCriteria(): resets to the global city average
-        setCriteria(category): markers represent the category average
-        setCriteria(category, criteria): markers show the specific criteria score
-        ###
-        @category = category
-        @criteria = criteria
-        @renderMarkers()
-
-    localize: (localized) ->
-        if localized
-            @localizedLayer.enable()
-            @englishLayer.disable()
-        else
-            @englishLayer.enable()
-            @localizedLayer.disable()
-
-
-class CityList extends Backbone.View
-    el: $('#content')
-    template: ich.template_citylist
-
-    initialize: ->
-        _.bindAll(@)
-        @render()
-        # @collection.on('all', =>
-        #     @render())
-
-    render: ->
-        content = ich.template_citylist()
-        @collection.each((city) =>
-            c = new CityListItem({model: city})
-            $(content).children('ul').append(c.render().el)
-        )
-        @$el.html(content)
-
-        return @
-
-
-class CityListItem extends Backbone.View
-    tagName: 'li'
-    class: 'city_listitem'
-
-    initialize: ->
-        _.bindAll(@)
-        # @model.on('all', => @render())
-        @render()
-
-    render: ->
-        content = ich.template_citylistitem({
-            name: @model.get('name'),
-            score: @model.totalAveragePercent(),
-            id: @model.id,
-        })
-        @$el.html(content)
-        return @
-
-
-root.cities = new Cities()
-root.cities.reset(data)
-
-
 
 $ ->
-    root.cm = new MapView({collection: root.cities})
-    root.cl = new CityList({collection: root.cities})
+
+    class City extends Backbone.Model
+        _isInt: (n) ->
+            return (typeof(n) == 'number' &&
+                    parseFloat(n) == parseInt(n, 10) &&
+                    !isNaN(n))
+
+        _sum: (scores) ->
+            return _.reduce(scores, (memo, score) ->
+                return memo + score)
+
+        _average: (scores) ->
+            return @_sum(scores) / scores.length
+
+        categoryScores: (category) ->
+            return @get('data')[category]
+
+        categoryAverage: (category) ->
+            return @_average(@categoryScores(category))
+
+        total: ->
+            return @_sum(@_sum(scores) for scores in @get('data'))
+
+        totalAverage: ->
+            return @total() / @totalMax()
+
+        totalAveragePercent: ->
+            return Math.round(@totalAverage() * 100.0)
+
+        totalMax: ->
+            return @_sum(_.map(@get('data'), (d) -> return d.length))
+
+        score: (category, criteria) ->
+            return @get('data')[category][criteria]
+
+        marker: (category, criteria) ->
+            m = {
+                geometry: {
+                    type: 'Point',
+                    coordinates: @get('coordinates'),
+                },
+                properties: {
+                    title: @get('name')
+                    id: @id
+                    'marker-size': 'small'
+                }
+            }
+
+            if @_isInt(criteria) and @_isInt(category)
+                m['properties']['description'] = root.guide[category]['fields'][criteria]
+                m['properties']['value'] = @score(category, criteria)
+                m['properties']['marker-color'] = markerColorScale(m['properties']['value'])
+                m['properties']['data-category'] = category
+                m['properties']['data-criteria'] = criteria
+
+            else if @_isInt(category)
+                m['properties']['description'] = root.guide[category]['category']
+                m['properties']['value'] = @categoryAverage(category)
+                m['properties']['marker-color'] = markerColorScale(m['properties']['value'])
+                m['properties']['data-category'] = category
+
+            else # show overall score
+                m['properties']['description'] = @totalAverage()
+                m['properties']['value'] = @totalAverage()
+                m['properties']['marker-color'] = markerColorScale(m['properties']['value'])
+
+            return m
+
+
+    class Cities extends Backbone.Collection
+        model: City
+
+
+    class MapView extends Backbone.View
+        el: $('#map')
+
+        initialize: ->
+            @localizedLayer = mapbox.layer().id('idan.map-468vpvim').composite(false)
+            @englishLayer = mapbox.layer().id('idan.map-b25l9lse').composite(false)
+            @markerLayer = mapbox.markers.layer()
+            mapbox.markers.interaction(@markerLayer)
+            @category = undefined
+            @criteria = undefined
+            @map = mapbox.map(@el)
+            @map.addTileLayer(@localizedLayer)
+            @map.addTileLayer(@englishLayer.disable())
+            @map.addLayer(@markerLayer)
+            @map.ui.zoomer.add()
+            @map.setPanLimits(israelExtent)
+            @map.setZoomRange(7,12)
+            @map.setExtent(israelExtent)
+            @collection.on('all', => @render())
+            @render()
+
+        render: ->
+            @markerLayer.features(@collection.map((d) =>
+                return d.marker(@category, @criteria)))
+            return @
+
+        setCriteria: (category, criteria) ->
+            ###
+            Set the criteria used for generating markers.
+            Call in one of three forms:
+            setCriteria(): resets to the global city average
+            setCriteria(category): markers represent the category average
+            setCriteria(category, criteria): markers show the specific criteria score
+            ###
+            @category = category
+            @criteria = criteria
+            @renderMarkers()
+
+        localize: (localized) ->
+            if localized
+                @localizedLayer.enable()
+                @englishLayer.disable()
+            else
+                @englishLayer.enable()
+                @localizedLayer.disable()
+
+
+
+
+
+    class CityListView extends Backbone.View
+        tagName: 'section'
+        className: 'citylist'
+        template: _.template($('#template_citylist').html())
+
+        initialize: ->
+            _.bindAll(@)
+            @render()
+            # @collection.on('all', =>
+            #     @render())
+
+        render: ->
+            @$el.html(@template())
+            $ul = @$el.children('ul')
+            @collection.each((city) =>
+                c = new CityListItemView({model: city})
+                $ul.append(c.render().el)
+            )
+            return @
+
+
+    class CityListItemView extends Backbone.View
+        tagName: 'li'
+        class: 'city_listitem'
+        template: _.template($('#template_citylistitem').html())
+
+        initialize: ->
+            _.bindAll(@)
+            # @model.on('all', => @render())
+            @render()
+
+        render: ->
+            content = @template({
+                name: @model.get('name'),
+                score: @model.totalAveragePercent(),
+                id: @model.id,
+            })
+            @$el.html(content)
+            return @
+
+
+    root.cities = new Cities()
+    root.cities.reset(data)
+
+    class TransparencyMap extends Backbone.Router
+        routes: {
+            '': 'home'
+        }
+
+        initialize: ->
+            @cityListView = new CityListView({collection: root.cities})
+            @mapView = new MapView({collection: root.cities})
+
+        home: ->
+            $('#info').html(@cityListView.render().el)
+
+
+    root.App = new TransparencyMap()
+    Backbone.history.start()
