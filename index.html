@@ -49,11 +49,11 @@
         </script>
 
         <script type="text/html" id="template_citylistitem">
-            <a href="" data-id="{{id}}">{{ name }} &middot; {{ score }}%</a>
+            <a href="#city/{{id}}" data-id="{{id}}">{{ name }} &middot; {{ score }}%</a>
         </script>
 
         <script type="text/html" id="template_maptooltip">
-            <a class="scoretooltip" href="{{ properties.url }}">
+            <a class="scoretooltip" href="#city/{{ properties.id }}">
                 <h1>{{ properties.name }}</h1>
                 <div class="details">
                     <div class="score {{ properties.scoreclass }}">
