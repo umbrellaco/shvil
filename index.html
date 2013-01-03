@@ -51,5 +51,19 @@
         <script type="text/html" id="template_citylistitem">
             <a href="" data-id="{{id}}">{{ name }} &middot; {{ score }}%</a>
         </script>
+
+        <script type="text/html" id="template_maptooltip">
+            <a class="scoretooltip" href="{{ properties.url }}">
+                <h1>{{ properties.name }}</h1>
+                <div class="details">
+                    <div class="score {{ properties.scoreclass }}">
+                        {{ properties.prettyscore }}
+                    </div>
+                    <p class="description">
+                        {{ properties.description }}
+                    </p>
+                </div>
+            </a>
+        </script>
    </body>
 </html>

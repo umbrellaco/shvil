@@ -23,6 +23,7 @@
 
 
 $color-blue: #2C7FB8;
+$color-blue-highlight: #5197d4;
 $color-yellow: #F89406;
 $color-yellow-highlight: #FBB450;
 $color-red: #DA4F49;
@@ -155,6 +156,58 @@ body, html {
         }
         &[data-class=c] a {
             @include dataclass($color-red, $color-red-highlight);
+        }
+    }
+}
+
+.scoretooltip {
+    display: block;
+    text-decoration: none;
+    color: $color-text;
+    min-width: 15em;
+
+    h1 {
+        margin: 0 0 0.3em;
+        padding: 0 0 0.1em;
+        line-height: 1em;
+        color: $color-blue;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+        @include transition(color 0.15s ease);
+    }
+    &:hover {
+        background-color: #f8f8f8;
+        @include box-shadow(0 0 30px 0 #f8f8f8);
+        h1 {
+            color: $color-blue-highlight;
+        }
+    }
+    .details {
+        @include clearfix;
+        text-align: right;
+        direction: rtl;
+        .score {
+            float: left;
+            color: white;
+            font-size: 1.2em;
+            letter-spacing: -1px;
+            font-weight: bold;
+            background: #444;
+            padding: 0.5em;
+            border-radius: 2px;
+            &.a {
+                background-color: $color-green;
+            }
+            &.b {
+                background-color: $color-yellow;
+            }
+            &.c {
+                background-color: $color-red;
+            }
+        }
+        .description {
+            margin: 0;
+            padding: 0;
         }
     }
 }

@@ -2825,11 +2825,11 @@ root.data = [
 
 
 # This scale is not really colorblind-safe.
-markerColorScale = d3.scale.quantile()
+scoreColorScale = d3.scale.quantile()
                     .domain([0, 0.5, 0.6, 1])
                     .range(['#DA4F49', '#F89406', '#51A351'])
 
-markerClassScale = d3.scale.quantile()
+scoreClassScale = d3.scale.quantile()
                     .domain([0, 0.5, 0.6, 1])
                     .range(['c', 'b', 'a'])
 
@@ -2860,11 +2860,17 @@ $ ->
         _average: (scores) ->
             return @_sum(scores) / scores.length
 
+        _percentify: (score) ->
+            return Math.round(score * 100.0)
+
         categoryScores: (category) ->
             return @get('data')[category]
 
         categoryAverage: (category) ->
             return @_average(@categoryScores(category))
+
+        categoryAveragePercent: (category) ->
+            return @_percentify(@categoryAverage(category))
 
         total: ->
             return @_sum(@_sum(scores) for scores in @get('data'))
@@ -2873,7 +2879,7 @@ $ ->
             return @total() / @totalMax()
 
         totalAveragePercent: ->
-            return Math.round(@totalAverage() * 100.0)
+            return @_percentify(@totalAverage())
 
         totalMax: ->
             return @_sum(_.map(@get('data'), (d) -> return d.length))
@@ -2888,7 +2894,7 @@ $ ->
                     coordinates: @get('coordinates'),
                 },
                 properties: {
-                    title: @get('name')
+                    name: @get('name')
                     id: @id
                     'marker-size': 'medium'
                 }
@@ -2896,25 +2902,32 @@ $ ->
 
             props = m['properties']
             if @_isInt(criteria) and @_isInt(category)
+                props['score'] = @score(category, criteria)
+                props['scoreclass'] = scoreClassScale(props['score'])
+                props['prettyscore'] = props['scoreclass'].toUpperCase()
                 props['description'] = root.guide[category]['fields'][criteria]
-                props['value'] = @score(category, criteria)
-                props['marker-color'] = markerColorScale(props['value'])
-                props['marker-symbol'] = markerClassScale(props['value'])
+                props['marker-color'] = scoreColorScale(props['score'])
+                props['marker-symbol'] = scoreClassScale(props['score'])
                 props['data-category'] = category
                 props['data-criteria'] = criteria
 
             else if @_isInt(category)
+                props['score'] = @categoryAverage(category)
+                props['scoreclass'] = scoreClassScale(props['score'])
+                props['prettyscore'] = @categoryAveragePercent(category) + '%'
                 props['description'] = root.guide[category]['category']
-                props['value'] = @categoryAverage(category)
-                props['marker-color'] = markerColorScale(props['value'])
-                props['marker-symbol'] = markerClassScale(props['value'])
+                props['marker-color'] = scoreColorScale(props['score'])
+                props['marker-symbol'] = scoreClassScale(props['score'])
                 props['data-category'] = category
 
             else # show overall score
-                props['description'] = @totalAveragePercent() + '%'
-                props['value'] = @totalAverage()
-                props['marker-color'] = markerColorScale(m['properties']['value'])
-                props['marker-symbol'] = markerClassScale(props['value'])
+                props['score'] = @totalAverage()
+                props['scoreclass'] = scoreClassScale(props['score'])
+                props['prettyscore'] = @totalAveragePercent() + '%'
+                props['description'] = "ציון כולל"
+                props['marker-color'] = scoreColorScale(props['score'])
+                props['marker-symbol'] = scoreClassScale(props['score'])
+                props['data-category'] = category
 
             return m
 
@@ -2925,12 +2938,15 @@ $ ->
 
     class MapView extends Backbone.View
         el: $('#map')
+        maptooltipTemplate: _.template($('#template_maptooltip').html())
 
         initialize: ->
+            _.bindAll(@)
             @localizedLayer = mapbox.layer().id('idan.map-468vpvim').composite(false)
             @englishLayer = mapbox.layer().id('idan.map-b25l9lse').composite(false)
             @markerLayer = mapbox.markers.layer()
-            mapbox.markers.interaction(@markerLayer)
+            interaction = mapbox.markers.interaction(@markerLayer)
+            interaction.formatter((feature) => return @maptooltipTemplate(feature))
             @category = undefined
             @criteria = undefined
             @map = mapbox.map(@el)
@@ -2959,7 +2975,7 @@ $ ->
             ###
             @category = category
             @criteria = criteria
-            @renderMarkers()
+            @render()
 
         localize: (localized) ->
             if localized
@@ -3010,7 +3026,7 @@ $ ->
                 score: @model.totalAveragePercent(),
                 id: @model.id,
             })
-            @$el.attr('data-class', markerClassScale(@model.totalAverage()))
+            @$el.attr('data-class', scoreClassScale(@model.totalAverage()))
             @$el.html(content)
             return @
 
@@ -3026,6 +3042,7 @@ $ ->
         initialize: ->
             @cityListView = new CityListView({collection: root.cities})
             @mapView = new MapView({collection: root.cities})
+            root.mapView = @mapView
 
         home: ->
             $('#info').html(@cityListView.render().el)
