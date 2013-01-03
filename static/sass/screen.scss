@@ -34,6 +34,8 @@ $color-primary: $color-blue;
 $color-text: #444;
 $color-text-light: #bbb;
 
+$map-width: 400px;
+
 * {
     @include box-sizing(border-box);
 }
@@ -46,23 +48,31 @@ body, html {
     font-family: Alef, sans-serif;
 }
 
-#map {
-    position: absolute;
+.mapwrap {
+    position: fixed;
     top: 0;
     bottom: 0;
-    width: 400px;
     left: 0;
+    width: $map-width;
     background: #ddd;
+    #map {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
 }
 
 #content {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
-    left: 400px;
     right: 0;
-    direction: rtl;
+    left: $map-width;
     padding: 0;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
     header {
         text-align: center;
         padding: 1em;
@@ -93,11 +103,6 @@ body, html {
 
         }
     }
-}
-
-#info {
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
 }
 
 .citylist {
