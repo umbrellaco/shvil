@@ -74,7 +74,7 @@ body, html {
     padding: 0;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
-    header {
+    &>header {
         text-align: center;
         padding: 1em;
         h1, h2 {
@@ -156,6 +156,109 @@ body, html {
         }
         &[data-class=c] a {
             @include dataclass($color-red, $color-red-highlight);
+        }
+    }
+}
+
+.citydetail {
+    padding: 1em;
+    direction: rtl;
+    &>h1 {
+        color: $color-primary;
+        margin: 0;
+        text-align: center;
+    }
+    .category {
+        margin: 1em 0 3em;
+        header {
+            background: #eee;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            position: relative;
+            a {
+                display: block;
+                text-decoration: none;
+            }
+            h1 {
+                color: $color-text;
+                margin: 0;
+                padding: 0.5em 1em 0.5em 0.5em;
+                font-size: 2em;
+                width: 80%;
+            }
+            .grade {
+                position: absolute;
+                width: 20%;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                font-weight: bold;
+                font-size: 2.5em;
+                color: white;
+                margin: 0;
+                text-align: center;
+                padding: 1% 0;
+                &.a {
+                    background: $color-green;
+                }
+                &.b {
+                    background: $color-yellow;
+                }
+                &.c {
+                    background: $color-red;
+                }
+                .vwrap {
+                    display: table;
+                    width: 100%;
+                    height: 100%;
+                    margin: 0;
+                    padding: 0;
+                }
+                .vcenter {
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+    .criteria {
+        .grade {
+            border-bottom: 1px solid #ddd;
+            padding: 1em;
+            &:last-child {
+                border-bottom: none;
+            }
+            a {
+                @include clearfix;
+                display: block;
+                text-decoration: none;
+                color: $color-text;
+            }
+            h1 {
+                float: right;
+                width: 90%;
+                font-weight: normal;
+                font-size: 1.5em;
+            }
+            .grade {
+                float: right;
+                width: 10%;
+                font-weight: bold;
+                font-size: 1.5em;
+                color: white;
+                padding: 0.5em;
+                border-radius: 4px;
+                text-align: center;
+                &.A {
+                    background: $color-green;
+                }
+                &.B {
+                    background: $color-yellow;
+                }
+                &.C {
+                    background: $color-red;
+                }
+            }
         }
     }
 }

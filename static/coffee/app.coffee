@@ -3029,14 +3029,6 @@ $ ->
             return @
 
 
-    # class TemplateView extends Backbone.View
-    #     initialize: ->
-    #         _.bindAll(@)
-    #         @render()
-
-    #     render: ->
-
-
     class CityView extends Backbone.View
         tagName: 'section'
         className: 'citydetail'
@@ -3058,6 +3050,8 @@ $ ->
                         category: i,
                         name: root.guide[i]['category'],
                         percentage: @model.categoryAveragePercent(i)
+                        score: @model.categoryAverage(i)
+                        grade: scoreClassScale(@model.categoryAverage(i))
                     }))
                 for criteria, j in category
                     crit = @criteriaTemplate({
@@ -3066,7 +3060,7 @@ $ ->
                         name: root.guide[i]['fields'][j],
                         grade: @model.grade(i, j)
                         })
-                    $cat.append(crit)
+                    $cat.children('.criteria').append(crit)
                 @$el.append($cat)
 
             return @

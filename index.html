@@ -67,23 +67,34 @@
         </script>
 
         <script type="text/html" id="template_citydetail">
-            <h1>name: {{ name }}</h1>
-            <p>XXX description also <a href="#">Back to city list</a></p>
+            <h1>{{ name }}</h1>
+            <p><a href="#">Back to city list</a></p>
+            <p>XXX Click on any category or criteria to compare cities on the map</p>
         </script>
 
         <script type="text/html" id="template_category">
             <section class="category" data-category="{{ category }}">
-                <h1><a data-category="{{ category }}" href="">{{ name }}</a></h1>
-                <p>XXX category description</p>
-                <p>{{ percentage }}%</p>
+                <header>
+                    <a data-category="{{ category }}" href="">
+                        <h1>{{ name }}</h1>
+                        <div class="grade {{grade}}">
+                            <div class="vwrap">
+                            <div class="vcenter">{{ percentage }}%</div>
+                            </div>
+                        </div>
+                    </a>
+                </header>
+                <div class="criteria"></div>
             </section>
         </script>
 
+
         <script type="text/html" id="template_criteria">
-            <section class="criteria">
-                <h1><a data-category="{{ category }}" data-criteria="{{ criteria }}" href="">{{ name }}</a></h1>
-                <p>XXX criteria description</p>
-                <p>Grade: {{ grade }}</p>
+            <section class="grade">
+                <a data-category="{{ category }}" data-criteria="{{ criteria }}" href="">
+                    <h1>{{ name }}</h1>
+                    <p class="grade {{ grade }}">{{ grade }}</p>
+                </a>
             </section>
         </script>
 
