@@ -2887,6 +2887,9 @@ $ ->
         score: (category, criteria) ->
             return @get('data')[category][criteria]
 
+        grade: (category, criteria) ->
+            return scoreClassScale(@score(category, criteria)).toUpperCase()
+
         marker: (category, criteria) ->
             m = {
                 geometry: {
@@ -2986,9 +2989,6 @@ $ ->
                 @localizedLayer.disable()
 
 
-
-
-
     class CityListView extends Backbone.View
         tagName: 'section'
         className: 'citylist'
@@ -2997,8 +2997,6 @@ $ ->
         initialize: ->
             _.bindAll(@)
             @render()
-            # @collection.on('all', =>
-            #     @render())
 
         render: ->
             @$el.html(@template())
@@ -3031,21 +3029,74 @@ $ ->
             return @
 
 
-    root.cities = new Cities()
-    root.cities.reset(data)
+    # class TemplateView extends Backbone.View
+    #     initialize: ->
+    #         _.bindAll(@)
+    #         @render()
+
+    #     render: ->
+
+
+    class CityView extends Backbone.View
+        tagName: 'section'
+        className: 'citydetail'
+        cityTemplate: _.template($('#template_citydetail').html())
+        categoryTemplate: _.template($('#template_category').html())
+        criteriaTemplate: _.template($('#template_criteria').html())
+
+
+        initialize: ->
+            _.bindAll(@)
+            @render()
+
+        render: ->
+            @$el.html(@cityTemplate({
+                name: @model.get('name')
+                }))
+            for category, i in @model.get('data')
+                $cat = $(@categoryTemplate({
+                        category: i,
+                        name: root.guide[i]['category'],
+                        percentage: @model.categoryAveragePercent(i)
+                    }))
+                for criteria, j in category
+                    crit = @criteriaTemplate({
+                        category: i,
+                        criteria: j,
+                        name: root.guide[i]['fields'][j],
+                        grade: @model.grade(i, j)
+                        })
+                    $cat.append(crit)
+                @$el.append($cat)
+
+            return @
+
+
+    cities = new Cities()
+    cities.reset(data)
+    root.cities = cities
 
     class TransparencyMap extends Backbone.Router
         routes: {
-            '': 'home'
+            '': 'home',
+            'city/:id': 'city'
         }
 
         initialize: ->
-            @cityListView = new CityListView({collection: root.cities})
-            @mapView = new MapView({collection: root.cities})
+            @cityListView = new CityListView({collection: cities})
+            @mapView = new MapView({collection: cities})
             root.mapView = @mapView
 
         home: ->
             $('#info').html(@cityListView.render().el)
+            @mapView.setCriteria()
+
+        city: (id) ->
+            $('#info').empty()
+            @mapView.setCriteria()
+            cv = new CityView({model: cities.get(id)})
+            $('#info').html(cv.render().el)
+
 
 
     root.App = new TransparencyMap()
