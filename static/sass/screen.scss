@@ -77,6 +77,18 @@ body, html {
     }
 }
 
+#maplegend {
+    position: absolute;
+    left: 2em;
+    right: 2em;
+    bottom: 2em;
+    @include background(linear-gradient(white, #eee));
+    padding: 0.5em;
+    border-radius: 3px;
+    border: 1px solid #bbb;
+    @include box-shadow(0 0 20px 0 hsla(0, 0%, 0%, 0.25));
+}
+
 #content {
     position: fixed;
     top: 0;
