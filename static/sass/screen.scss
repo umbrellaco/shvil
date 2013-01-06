@@ -37,6 +37,18 @@ $color-text-light: #bbb;
 
 $map-width: 400px;
 
+@mixin graded() {
+    &.A, &.a {
+        background: $color-green;
+    }
+    &.B, &.b {
+        background: $color-yellow;
+    }
+    &.C, &.c {
+        background: $color-red;
+    }
+}
+
 * {
     @include box-sizing(border-box);
 }
