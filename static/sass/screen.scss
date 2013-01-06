@@ -72,10 +72,11 @@ body, html {
     left: 2em;
     right: 2em;
     bottom: 2em;
-    @include background(linear-gradient(white, #eee));
+    @include background(linear-gradient($color-blue-highlight, $color-blue));
+    color: white;
     padding: 0.5em;
     border-radius: 3px;
-    border: 1px solid #bbb;
+    border: 1px solid darken($color-blue, 10%);
     @include box-shadow(0 0 20px 0 hsla(0, 0%, 0%, 0.25));
 }
 
