@@ -316,3 +316,21 @@ body, html {
         }
     }
 }
+
+.marker {
+    width: 24px;
+    height: 24px;
+    background-position: 0 0;
+    &.a, &.A, &.green {
+        background-position: -24px;
+    }
+    &.b, &.B, &.yellow {
+        background-position: -48px;
+    }
+    &.c, &.C, &.red {
+        background-position: -72px;
+    }
+    &.a, &.A, &.blue {
+        background-position: -96px;
+    }
+}
