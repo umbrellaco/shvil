@@ -1,5 +1,6 @@
 import csv
 import json
+import re
 
 city_data = []
 criteria_data = []
@@ -24,7 +25,7 @@ with open('data.csv', 'r') as f:
     cur_fields = []
     pairs = zip(data[0], data[1])[2:]
     for cat, field in pairs:
-        field = field.strip()
+        field = re.match(r'^(\d+\.)?(.*)', field).groups()[1].strip()
         if cat and cat != cur_cat:
             if cur_cat:
                 criteria_data.append({
