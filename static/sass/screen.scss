@@ -1,14 +1,13 @@
 @import "normalize";
 @import "bourbon/bourbon";
 
-
 @include font-face($font-family: "Alef",
-                   $file-path: "/static/fonts/Alef-regular",
+                   $file-path: "static/fonts/Alef-regular",
                    $weight: 400,
                    $style: normal);
 
 @include font-face($font-family: "Alef",
-                   $file-path: "/static/fonts/Alef-bold",
+                   $file-path: "static/fonts/Alef-bold",
                    $weight: 700,
                    $style: normal);
 
