@@ -3018,7 +3018,6 @@ $ ->
 
         initialize: ->
             _.bindAll(@)
-            # @model.on('all', => @render())
             @render()
 
         render: ->
