@@ -3096,8 +3096,15 @@ $ ->
     root.App = new TransparencyMap()
     Backbone.history.start()
 
-    $('.category-link').click(() ->
+    $('.category-link').live('click', () ->
         category_id = parseInt($(this).attr('data-category'))
         mapView.setCriteria(category_id)
+        return false
+    )
+
+    $('.criteria-link').live('click', () ->
+        category_id = parseInt($(this).attr('data-category'))
+        criteria_id = parseInt($(this).attr('data-criteria'))
+        mapView.setCriteria(category_id, criteria_id)
         return false
     )

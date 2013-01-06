@@ -75,7 +75,7 @@
         <script type="text/html" id="template_category">
             <section class="category" data-category="{{ category }}">
                 <header>
-                    <a class="category-link" data-category="{{ category }}" href="" onclick="return false;">
+                    <a class="category-link" data-category="{{ category }}" href="">
                         <h1>{{ name }}</h1>
                         <div class="grade {{grade}}">
                             <div class="vwrap">
@@ -91,7 +91,7 @@
 
         <script type="text/html" id="template_criteria">
             <section class="grade">
-                <a data-category="{{ category }}" data-criteria="{{ criteria }}" href="">
+                <a class="criteria-link" data-category="{{ category }}" data-criteria="{{ criteria }}" href="">
                     <h1>{{ name }}</h1>
                     <p class="grade {{ grade }}">{{ grade }}</p>
                 </a>
