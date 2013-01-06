@@ -2953,6 +2953,7 @@ $ ->
                     lat: m.geometry.coordinates[1],
                     lon: m.geometry.coordinates[0]
                     }).zoom(@map.zoom()).optimal()
+                root.App.navigate("city/#{m.properties.id}", {trigger: true})
             )
             return elem
 
