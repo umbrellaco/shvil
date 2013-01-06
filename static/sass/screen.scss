@@ -2,12 +2,12 @@
 @import "bourbon/bourbon";
 
 @include font-face($font-family: "Alef",
-                   $file-path: "static/fonts/Alef-regular",
+                   $file-path: "/static/fonts/Alef-regular",
                    $weight: 400,
                    $style: normal);
 
 @include font-face($font-family: "Alef",
-                   $file-path: "static/fonts/Alef-bold",
+                   $file-path: "/static/fonts/Alef-bold",
                    $weight: 700,
                    $style: normal);
 
@@ -68,6 +68,7 @@ body, html {
 
 #maplegend {
     position: absolute;
+    direction: rtl;
     left: 2em;
     right: 2em;
     bottom: 2em;
@@ -84,7 +85,7 @@ body, html {
     bottom: 0;
     right: 0;
     left: $map-width;
-    padding: 0;
+    padding: 0 0 2em 0;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
     &>header {

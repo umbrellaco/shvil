@@ -3008,6 +3008,7 @@ $ ->
                 c = new CityListItemView({model: city})
                 $ul.append(c.render().el)
             )
+            $('#maplegend').text('ציון שקיפות בללי')
             return @
 
 
@@ -3038,6 +3039,10 @@ $ ->
         categoryTemplate: _.template($('#template_category').html())
         criteriaTemplate: _.template($('#template_criteria').html())
 
+        events: {
+          'click .category-link': 'recolorMap',
+          'click .criteria-link': 'recolorMap',
+        }
 
         initialize: ->
             _.bindAll(@)
@@ -3069,6 +3074,20 @@ $ ->
 
             return @
 
+        recolorMap: (ev) ->
+            console.log("recolor map called!")
+            source = $(ev.currentTarget)
+            description = source.children('h1').first().text()
+            category = parseInt(source.attr('data-category') or -1)
+            criteria = parseInt(source.attr('data-criteria') or -1)
+            if (category >= 0 and criteria >=0)
+                mapView.setCriteria(category, criteria)
+                $('#maplegend').text(description)
+            else if (category >= 0)
+                mapView.setCriteria(category)
+                $('#maplegend').text(description)
+            return false
+
 
     cities = new Cities()
     cities.reset(data)
@@ -3099,16 +3118,3 @@ $ ->
 
     root.App = new TransparencyMap()
     Backbone.history.start()
-
-    $('.category-link').live('click', () ->
-        category_id = parseInt($(this).attr('data-category'))
-        mapView.setCriteria(category_id)
-        return false
-    )
-
-    $('.criteria-link').live('click', () ->
-        category_id = parseInt($(this).attr('data-category'))
-        criteria_id = parseInt($(this).attr('data-criteria'))
-        mapView.setCriteria(category_id, criteria_id)
-        return false
-    )
