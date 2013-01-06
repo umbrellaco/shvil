@@ -2840,6 +2840,9 @@ israelExtent = new MM.Extent(33.6006300456776,   # north
                              29.223819169667124, # south
                              36.1) # east
 
+# Map Centerpoint for Israel
+israelCenter = {lat: 31.437766370126315, lon: 34.99999999999998}
+
 _.templateSettings = {
   interpolate : /\{\{(.+?)\}\}/g
 }
@@ -2959,7 +2962,7 @@ $ ->
             @map.ui.zoomer.add()
             @map.setPanLimits(israelExtent)
             @map.setZoomRange(7,12)
-            @map.setExtent(israelExtent)
+            @map.centerzoom(israelCenter, 8)
             @collection.on('all', => @render())
             @render()
 
