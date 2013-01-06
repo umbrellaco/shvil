@@ -2946,11 +2946,21 @@ $ ->
         el: $('#map')
         maptooltipTemplate: _.template($('#template_maptooltip').html())
 
+        markerFactory: (m) ->
+            elem = mapbox.markers.simplestyle_factory(m)
+            MM.addEvent(elem, 'click', (e) =>
+                @map.ease.location({
+                    lat: m.geometry.coordinates[1],
+                    lon: m.geometry.coordinates[0]
+                    }).zoom(@map.zoom()).optimal()
+            )
+            return elem
+
         initialize: ->
             _.bindAll(@)
             @localizedLayer = mapbox.layer().id('idan.map-468vpvim').composite(false)
             @englishLayer = mapbox.layer().id('idan.map-b25l9lse').composite(false)
-            @markerLayer = mapbox.markers.layer()
+            @markerLayer = mapbox.markers.layer().factory(@markerFactory)
             interaction = mapbox.markers.interaction(@markerLayer)
             interaction.formatter((feature) => return @maptooltipTemplate(feature))
             @category = undefined
