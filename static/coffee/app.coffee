@@ -3019,7 +3019,7 @@ $ ->
                 c = new CityListItemView({model: city})
                 $ul.append(c.render().el)
             )
-            $('#maplegend').text('ציון שקיפות בללי')
+            $('#maplegend').text('ציון שקיפות כללי')
             return @
 
 
