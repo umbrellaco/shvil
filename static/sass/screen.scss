@@ -11,7 +11,6 @@
                    $weight: 700,
                    $style: normal);
 
-
 $color-blue: #2C7FB8;
 $color-blue-highlight: #5197d4;
 $color-yellow: #F89406;
@@ -89,17 +88,18 @@ body, html {
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
     &>header {
-        text-align: center;
-        padding: 1em;
+        text-align: right;
+        margin: 1em 1em;
+        background: url(static/img/ti_logo.svg) right 0.5em no-repeat;
+        background-size: 64px 64px;
         h1, h2 {
             margin: 0;
-            padding: 0;
+            padding-right: 80px;
         }
         h1 {
-            font-size: 4em;
+            font-size: 3em;
             line-height: 1em;
             margin: 0;
-            padding: 0;
             color: $color-primary;
             font-weight: bold;
             letter-spacing: -1px;
@@ -113,9 +113,6 @@ body, html {
             color: $color-text-light;
             padding-bottom: 0.5em;
             border-bottom : 1px solid #ddd;
-
-
-
         }
     }
 }
