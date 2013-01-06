@@ -3046,8 +3046,10 @@ $ ->
 
         render: ->
             @$el.html(@cityTemplate({
-                name: @model.get('name')
-                }))
+                name: @model.get('name'),
+                score: @model.totalAveragePercent(),
+                grade: scoreClassScale(@model.totalAverage())
+            }))
             for category, i in @model.get('data')
                 $cat = $(@categoryTemplate({
                         category: i,
