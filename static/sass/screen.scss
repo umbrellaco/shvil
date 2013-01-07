@@ -119,7 +119,7 @@ body, html {
             font-weight: 400;
             color: $color-text-light;
             padding-bottom: 0.5em;
-            border-bottom : 1px solid #ddd;
+            border-bottom : 1px dashed #ddd;
         }
     }
 }
@@ -179,108 +179,102 @@ body, html {
 }
 
 .citydetail {
-    padding: 1em;
+    padding: 0;
     direction: rtl;
-    &>h1 {
-        color: $color-primary;
-        margin: 0;
-        text-align: center;
+    &>header {
+        margin: 1em;
+        border-bottom: 1px dashed #ddd;
+        .score {
+            float: right;
+            margin-left: 1em;
+        }
+        h1 {
+            color: $color-primary;
+            margin: 0;
+            line-height: 1.75em;
+        }
     }
-    .category {
-        margin: 1em 0 3em;
-        header {
-            background: #eee;
-            border: 1px solid #ddd;
-            border-radius: 3px;
+    .category, .criteria {
+        &>header {
+            @include clearfix;
+            margin: 1.5em 1em;
+            cursor: pointer;
+            @include transition(all 0.2s ease);
             position: relative;
-            a {
-                display: block;
-                text-decoration: none;
-            }
-            h1 {
-                color: $color-text;
-                margin: 0;
-                padding: 0.5em 1em 0.5em 0.5em;
-                font-size: 1.75em;
-                width: 80%;
-                border-left: 1px solid white;
-            }
-            .grade {
+            .triangle {
+                width: 0;
+                height: 0;
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+                border-left: 10px solid #E8E8E8;
                 position: absolute;
-                width: 20%;
-                left: 0;
+                left: -1em;
                 top: 0;
-                bottom: 0;
-                font-weight: bold;
-                font-size: 2.5em;
-                color: white;
-                margin: 0;
-                text-align: center;
-                padding: 1% 0;
-                border-right: 1px solid darken($color-green, 10%);
-                &.a {
-                    background: $color-green;
-                }
-                &.b {
-                    background: $color-yellow;
-                }
-                &.c {
-                    background: $color-red;
-                }
-                .vwrap {
-                    display: table;
-                    width: 100%;
-                    height: 100%;
-                    margin: 0;
-                    padding: 0;
-                }
-                .vcenter {
-                    display: table-cell;
-                    vertical-align: middle;
-                }
+                opacity: 0;
             }
-        }
-    }
-    .criteria {
-        .grade {
-            border-bottom: 1px solid #ddd;
-            padding: 1em;
-            &:last-child {
-                border-bottom: none;
-            }
-            a {
-                @include clearfix;
-                display: block;
-                text-decoration: none;
-                color: $color-text;
+            .score {
+                float: right;
+                margin-left: 1em;
             }
             h1 {
-                float: right;
-                width: 90%;
-                font-weight: normal;
-                font-size: 1.5em;
+                color: $color-text;
             }
-            .grade {
-                float: right;
-                width: 10%;
-                font-weight: bold;
-                font-size: 1.5em;
-                color: white;
-                padding: 0.5em;
-                border-radius: 4px;
-                text-align: center;
-                &.A {
-                    background: $color-green;
-                }
-                &.B {
-                    background: $color-yellow;
-                }
-                &.C {
-                    background: $color-red;
+        }
+        &.selected {
+            &>header {
+                background-color: lighten($color-blue, 45%);
+                .triangle {
+                    border-left-color: #ddd;
+                    opacity: 1.0;
                 }
             }
         }
     }
+
+    .criteria-list.collapsed {
+        display: none;
+    }
+
+
+    .category>header {
+        .score {
+            float: right;
+            margin-left: 1em;
+        }
+        h1 {
+            color: $color-text;
+            font-size: 1.15em;
+            margin-bottom: 0;
+        }
+    }
+
+    .criteria>header {
+            margin: 1.5em 2.3em 1.5em 1em;
+            .score {
+                float: right;
+                margin-left: 1em;
+                font-size: 1em;
+            }
+            h1 {
+                font-weight: normal;
+                font-size: 1em;
+                margin: 0.5em 0 0;
+            }
+    }
+
+}
+
+.score {
+    @include graded;
+    color: white;
+    display: block;
+    width: 2.5em;
+    height: 2.5em;
+    font-size: 1.5em;
+    line-height: 2em;
+    padding: 0.25em;
+    text-align: center;
+    border-radius: 3px;
 }
 
 .scoretooltip {
@@ -309,7 +303,7 @@ body, html {
         @include clearfix;
         text-align: right;
         direction: rtl;
-        .score {
+        .tooltipscore {
             float: left;
             color: white;
             font-size: 1.2em;
@@ -318,15 +312,7 @@ body, html {
             background: #444;
             padding: 0.5em;
             border-radius: 2px;
-            &.a {
-                background-color: $color-green;
-            }
-            &.b {
-                background-color: $color-yellow;
-            }
-            &.c {
-                background-color: $color-red;
-            }
+            @include graded;
         }
         .description {
             margin: 0;

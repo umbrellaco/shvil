@@ -37,6 +37,7 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.9/backbone-min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/1.4.3/jquery.scrollTo.min.js"></script>
         <script src="http://d3js.org/d3.v3.min.js"></script>
         <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
         <script src="static/js/app.js"></script>
@@ -55,7 +56,7 @@
             <a class="scoretooltip" href="#city/{{ properties.id }}">
                 <h1>{{ properties.name }}</h1>
                 <div class="details">
-                    <div class="score {{ properties.scoreclass }}">
+                    <div class="tooltipscore {{ properties.scoreclass }}">
                         {{ properties.prettyscore }}
                     </div>
                     <p class="description">
@@ -66,34 +67,35 @@
         </script>
 
         <script type="text/html" id="template_citydetail">
-            <h1>{{ name }}</h1>
-            <p><a href="#">חזרה לרשימת ערים</a></p>
+            <header>
+                <div class="score {{grade}}">{{ score }}%</div>
+                <h1>{{ name }}</h1>
+                <p><a href="#">חזרה לרשימת ערים</a></p>
+            </header>
+            <!--
             <p>לחיצה על כל קטגוריה או קריטריון תשווה את הערך על המפה לערים האחרות</p>
+            -->
         </script>
 
         <script type="text/html" id="template_category">
             <section class="category" data-category="{{ category }}">
                 <header>
-                    <a class="category-link" data-category="{{ category }}" href="">
+                        <div class="score {{ grade }}">{{ percentage }}%</div>
                         <h1>{{ name }}</h1>
-                        <div class="grade {{grade}}">
-                            <div class="vwrap">
-                            <div class="vcenter">{{ percentage }}%</div>
-                            </div>
-                        </div>
-                    </a>
+                        <div class="triangle"></div>
                 </header>
-                <div class="criteria"></div>
+                <div class="criteria-list collapsed"></div>
             </section>
         </script>
 
 
         <script type="text/html" id="template_criteria">
-            <section class="grade">
-                <a class="criteria-link" data-category="{{ category }}" data-criteria="{{ criteria }}" href="">
-                    <h1>{{ name }}</h1>
-                    <p class="grade {{ grade }}">{{ grade }}</p>
-                </a>
+            <section class="criteria" data-category="{{ category }}" data-criteria="{{ criteria }}">
+                    <header>
+                        <div class="score {{ grade }}">{{ grade }}</div>
+                        <h1>{{ name }}</h1>
+                        <div class="triangle"></div>
+                    </header>
             </section>
         </script>
 

@@ -2954,6 +2954,7 @@ $ ->
                     lon: m.geometry.coordinates[0]
                     }).zoom(@map.zoom()).optimal()
                 root.App.navigate("city/#{m.properties.id}", {trigger: true})
+                $('#content').scrollTo('0%')
             )
             return elem
 
@@ -3051,8 +3052,8 @@ $ ->
         criteriaTemplate: _.template($('#template_criteria').html())
 
         events: {
-          'click .category-link': 'recolorMap',
-          'click .criteria-link': 'recolorMap',
+          'click .category': 'recolorMap',
+          'click .criteria': 'recolorMap',
         }
 
         initialize: ->
@@ -3060,6 +3061,7 @@ $ ->
             @render()
 
         render: ->
+            $('#maplegend').text('ציון שקיפות כללי')
             @$el.html(@cityTemplate({
                 name: @model.get('name'),
                 score: @model.totalAveragePercent(),
@@ -3080,23 +3082,38 @@ $ ->
                         name: root.guide[i]['fields'][j],
                         grade: @model.grade(i, j)
                         })
-                    $cat.children('.criteria').append(crit)
+                    $cat.children('.criteria-list').append(crit)
                 @$el.append($cat)
 
             return @
 
         recolorMap: (ev) ->
-            console.log("recolor map called!")
             source = $(ev.currentTarget)
-            description = source.children('h1').first().text()
+            description = source.find('header>h1').first().text()
+            header = source.children('header')
+            triangle = header.children('.triangle')
+            console.log(header)
             category = parseInt(source.attr('data-category') or -1)
             criteria = parseInt(source.attr('data-criteria') or -1)
             if (category >= 0 and criteria >=0)
                 mapView.setCriteria(category, criteria)
                 $('#maplegend').text(description)
+                $('.selected').removeClass('selected')
+                source.addClass('selected')
+                triangle.css('top', (header.height() / 2 - 10) + 'px')
             else if (category >= 0)
                 mapView.setCriteria(category)
                 $('#maplegend').text(description)
+                if source.children('.criteria-list').hasClass('collapsed')
+                    source.children('.criteria-list').removeClass('collapsed')
+                    $('#content').scrollTo(source, 250, {offset: -20})
+                else
+                    $('.criteria-list').addClass('collapsed')
+                    $('#content').scrollTo(source, 250, {offset: -20})
+
+                $('.selected').removeClass('selected')
+                source.addClass('selected')
+                triangle.css('top', (header.height() / 2 - 10) + 'px')
             return false
 
 
@@ -3116,6 +3133,7 @@ $ ->
             root.mapView = @mapView
 
         home: ->
+            $('#info').empty()
             $('#info').html(@cityListView.render().el)
             @mapView.setCriteria()
 
