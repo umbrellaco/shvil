@@ -2981,6 +2981,7 @@ $ ->
         render: ->
             @markerLayer.features(@collection.map((d) =>
                 return d.marker(@category, @criteria)))
+            $('#maplegend').text(@markerLayer.features()[0].properties.description)
             return @
 
         setCriteria: (category, criteria) ->
@@ -3020,7 +3021,6 @@ $ ->
                 c = new CityListItemView({model: city})
                 $ul.append(c.render().el)
             )
-            $('#maplegend').text('ציון שקיפות כללי')
             return @
 
 
@@ -3054,6 +3054,7 @@ $ ->
         events: {
           'click .category': 'recolorMap',
           'click .criteria': 'recolorMap',
+          'click >header>.score': 'recolorMap',
         }
 
         initialize: ->
@@ -3061,7 +3062,7 @@ $ ->
             @render()
 
         render: ->
-            $('#maplegend').text('ציון שקיפות כללי')
+            # $('#maplegend').text('ציון שקיפות כללי')
             @$el.html(@cityTemplate({
                 name: @model.get('name'),
                 score: @model.totalAveragePercent(),
@@ -3092,28 +3093,25 @@ $ ->
             description = source.find('header>h1').first().text()
             header = source.children('header')
             triangle = header.children('.triangle')
-            console.log(header)
             category = parseInt(source.attr('data-category') or -1)
             criteria = parseInt(source.attr('data-criteria') or -1)
+            $('.selected').removeClass('selected')
+            triangle.css('top', (header.height() / 2 - 10) + 'px')
+
             if (category >= 0 and criteria >=0)
                 mapView.setCriteria(category, criteria)
-                $('#maplegend').text(description)
-                $('.selected').removeClass('selected')
                 source.addClass('selected')
-                triangle.css('top', (header.height() / 2 - 10) + 'px')
             else if (category >= 0)
                 mapView.setCriteria(category)
-                $('#maplegend').text(description)
                 if source.children('.criteria-list').hasClass('collapsed')
                     source.children('.criteria-list').removeClass('collapsed')
                     $('#content').scrollTo(source, 250, {offset: -20})
                 else
                     $('.criteria-list').addClass('collapsed')
                     $('#content').scrollTo(source, 250, {offset: -20})
-
-                $('.selected').removeClass('selected')
                 source.addClass('selected')
-                triangle.css('top', (header.height() / 2 - 10) + 'px')
+            else
+                mapView.setCriteria()
             return false
 
 
