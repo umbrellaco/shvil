@@ -89,6 +89,8 @@ body, html {
     padding: 0 0 2em 0;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
+    background: url(static/img/dotgrid.png) left top repeat;
+    background-attachment: scroll;
     &>header {
         text-align: right;
         margin: 1em 1em;
