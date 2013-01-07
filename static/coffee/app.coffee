@@ -3107,7 +3107,7 @@ $ ->
                     source.children('.criteria-list').removeClass('collapsed')
                     $('#content').scrollTo(source, 250, {offset: -20})
                 else
-                    $('.criteria-list').addClass('collapsed')
+                    source.children('.criteria-list').addClass('collapsed')
                     $('#content').scrollTo(source, 250, {offset: -20})
                 source.addClass('selected')
             else
