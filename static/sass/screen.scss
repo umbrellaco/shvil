@@ -201,6 +201,7 @@ body, html {
             cursor: pointer;
             @include transition(all 0.2s ease);
             position: relative;
+
             .triangle {
                 width: 0;
                 height: 0;
@@ -237,6 +238,9 @@ body, html {
 
 
     .category>header {
+        &:hover {
+            background-color: lighten($color-blue, 53%);
+        }
         .score {
             float: right;
             margin-left: 1em;
@@ -250,6 +254,9 @@ body, html {
 
     .criteria>header {
             margin: 1.5em 2.3em 1.5em 1em;
+            &:hover {
+                background-color: lighten($color-blue, 53%);
+            }
             .score {
                 float: right;
                 margin-left: 1em;
