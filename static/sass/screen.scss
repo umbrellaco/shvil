@@ -1,13 +1,61 @@
 @import "normalize";
 @import "bourbon/bourbon";
 
+
+
+@mixin linear {
+    @media screen and (max-width: 45em) {
+        @content;
+    }
+}
+
+@mixin mobile-landscape {
+    @media screen and (max-width: 30em) {
+        @content;
+    }
+}
+
+@mixin mobile-portrait {
+    @media screen and (max-width: 20em) {
+        @content;
+    }
+}
+
+
+@mixin tight {
+    @media screen and (min-width: 30em) and (max-width: 60em) {
+        @content;
+    }
+}
+
+@mixin full {
+    @media screen and (min-width: 62em) {
+        @content;
+    }
+}
+
+@mixin short {
+    @media screen and (max-height: 30em) {
+        @content;
+    }
+}
+
+@mixin retina {
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+           only screen and (min-device-pixel-ratio: 1.5) {
+        @content;
+    }
+}
+
+
+
 @include font-face($font-family: "Alef",
-                   $file-path: "/static/fonts/Alef-regular",
+                   $file-path: "../fonts/Alef-regular",
                    $weight: 400,
                    $style: normal);
 
 @include font-face($font-family: "Alef",
-                   $file-path: "/static/fonts/Alef-bold",
+                   $file-path: "../fonts/Alef-bold",
                    $weight: 700,
                    $style: normal);
 
@@ -37,6 +85,20 @@ $map-width: 400px;
         background: $color-red;
     }
 }
+
+@mixin dataclass($bg, $lighter) {
+    background-color: $bg;
+    @include background-image(linear-gradient(top, $lighter, $bg));
+    background-repeat: repeat-x;
+    color: white;
+    border: 1px solid darken($bg, 12%);
+    @include box-shadow(0 1px 0 0 rgba(255,255,255,0.35) inset);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    &:hover {
+        background-position: 0 -15px;
+    }
+}
+
 
 * {
     @include box-sizing(border-box);
@@ -72,7 +134,8 @@ body, html {
     left: 2em;
     right: 2em;
     bottom: 2em;
-    @include background(linear-gradient($color-blue-highlight, $color-blue));
+    background-color: $color-blue;
+    @include background-image(linear-gradient(top, $color-blue-highlight, $color-blue));
     color: white;
     padding: 0.5em;
     border-radius: 3px;
@@ -89,12 +152,12 @@ body, html {
     padding: 0 0 2em 0;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
-    background: url(static/img/dotgrid.png) left top repeat;
+    background: url(../img/dotgrid.png) left top repeat;
     background-attachment: scroll;
     &>header {
         text-align: right;
         margin: 1em 1em;
-        background: url(static/img/ti_logo.svg) right 0.5em no-repeat;
+        background: url(../img/ti_logo.svg) right 0.5em no-repeat;
         background-size: 64px 64px;
         a {
             text-decoration: none;
@@ -153,19 +216,6 @@ body, html {
             @include transition(all 0.15s ease);
         }
 
-        @mixin dataclass($bg, $lighter) {
-            background-color: $bg;
-            @include background-image(linear-gradient(top, $lighter, $bg));
-            background-repeat: repeat-x;
-            color: white;
-            border: 1px solid darken($bg, 12%);
-            @include box-shadow(0 1px 0 0 rgba(255,255,255,0.35) inset);
-            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-            &:hover {
-                background-position: 0 -15px;
-            }
-        }
-
         &[data-class=a] a {
             @include dataclass($color-green, $color-green-highlight);
         }
@@ -187,11 +237,26 @@ body, html {
         .score {
             float: right;
             margin-left: 1em;
+            cursor: pointer;
         }
         h1 {
             color: $color-primary;
             margin: 0;
             line-height: 1.75em;
+        }
+        p {
+            // clear: both;
+            padding-right: 5.24em;
+            font-size: 1em;
+            line-height: 1.5em;
+            margin: 0 0 1.5em;
+            color: $color-text-light;
+        }
+        a {
+            @include dataclass($color-blue, $color-blue-highlight);
+            text-decoration: none;
+            padding: 2px 5px;
+            margin-left: 0.5em;
         }
     }
     .category, .criteria {
@@ -343,5 +408,54 @@ body, html {
     }
     &.a, &.A, &.blue {
         background-position: -96px;
+    }
+}
+
+.denied {
+    position: absolute;
+    direction: rtl;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 1em;
+    background-color: $color-blue;
+    color: white;
+    text-align: center;
+    padding-top: 8em;
+    @include linear {
+        padding-top: 1em;
+    }
+    @include mobile-portrait {
+        padding-top: 3em;
+    }
+    h1 {
+        font-size: 4em;
+        margin: 0 0 0.5em 0;
+        line-height: 1em;
+        padding-top: 140px;
+        letter-spacing: -2px;
+        background: url(../img/ti_logo_white.png) center top no-repeat;
+        text-shadow: 0 -2px 0 darken($color-blue, 10%);
+        @include mobile-landscape {
+            font-size: 3em;
+        }
+    }
+
+    p {
+        font-size: 1.4em;
+        text-shadow: 0 -1px 0 darken($color-blue, 10%);
+        margin: 0;
+        @include mobile-landscape {
+            font-size: 1em;
+        }
+    }
+
+}
+
+.lowres {
+    display: none;
+    @media screen and (max-width: 1023px) {
+        display: block;
     }
 }
