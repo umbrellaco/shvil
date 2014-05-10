@@ -19,7 +19,8 @@ with open('data.csv', 'r') as f:
 
     categories = [cat for cat in data[0] if cat]
 
-    criteria_counts = [6, 9, 6, 3, 7, 3, 5, 15, 5, 5, 5, 6, 2, 8, 3, 2, 8, 7, 13, 4]
+    criteria_counts = [6, 8, 4, 3, 7, 3, 3, 6, 5, 3, 4, 7, 2, 6, 2, 1, 6, 4, 1, 3, 3, 3, 1, 6, 4]
+
 
     cur_cat = None
     cur_fields = []
