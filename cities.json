@@ -1,210 +1,626 @@
 [
     {
         "geometry": {
-            "type": "Point",
+            "type": "Point", 
             "coordinates": [
-                34.974339,
-                32.83036
+                34.622825, 
+                31.311336
             ]
-        },
+        }, 
         "properties": {
-            "title": "חיפה",
-            "id": 1
+            "id": 45, 
+            "title": "אופקים"
         }
-    },
+    }, 
     {
         "geometry": {
-            "type": "Point",
+            "type": "Point", 
             "coordinates": [
-                34.655316,
-                31.80438
+                34.856174, 
+                32.029747
             ]
-        },
+        }, 
         "properties": {
-            "title": "אשדוד",
-            "id": 14
+            "id": 44, 
+            "title": "אור יהודה"
         }
-    },
+    }, 
     {
         "geometry": {
-            "type": "Point",
+            "type": "Point", 
             "coordinates": [
-                34.791464,
+                34.951926, 
+                29.557668
+            ]
+        }, 
+        "properties": {
+            "id": 23, 
+            "title": "אילת"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                35.174515, 
+                32.104636
+            ]
+        }, 
+        "properties": {
+            "id": 25, 
+            "title": "אריאל"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.559466, 
+                31.665944
+            ]
+        }, 
+        "properties": {
+            "id": 21, 
+            "title": "אשקלון"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.791464, 
                 31.252972
             ]
-        },
+        }, 
         "properties": {
-            "title": "באר שבע",
-            "id": 8
+            "id": 16, 
+            "title": "באר שבע"
         }
-    },
+    }, 
     {
         "geometry": {
-            "type": "Point",
+            "type": "Point", 
             "coordinates": [
-                34.907612,
-                32.178194
+                34.9881, 
+                31.74704
             ]
-        },
+        }, 
         "properties": {
-            "title": "כפר סבא",
-            "id": 5
+            "id": 29, 
+            "title": "בית שמש"
         }
-    },
+    }, 
     {
         "geometry": {
-            "type": "Point",
+            "type": "Point", 
             "coordinates": [
-                34.824787,
-                32.068423
+                35.118037, 
+                31.693492
             ]
-        },
+        }, 
         "properties": {
-            "title": "רמת גן",
-            "id": 11
+            "id": 47, 
+            "title": "ביתר עילית"
         }
-    },
+    }, 
     {
         "geometry": {
-            "type": "Point",
+            "type": "Point", 
             "coordinates": [
-                34.787386,
-                32.015832
+                34.835228, 
+                32.084931
             ]
-        },
+        }, 
         "properties": {
-            "title": "חולון",
-            "id": 1
+            "id": 30, 
+            "title": "בני ברק"
         }
-    },
+    }, 
     {
         "geometry": {
-            "type": "Point",
+            "type": "Point", 
             "coordinates": [
-                34.777821,
-                32.066157
+                34.748021, 
+                32.013185
             ]
-        },
+        }, 
         "properties": {
-            "title": "תל אביב-יפו",
-            "id": 3
+            "id": 15, 
+            "title": "בת ים"
         }
-    },
+    }, 
     {
         "geometry": {
-            "type": "Point",
+            "type": "Point", 
             "coordinates": [
-                34.92088,
-                32.442784
+                34.849208, 
+                32.077298
             ]
-        },
+        }, 
         "properties": {
-            "title": "חדרה",
-            "id": 6
+            "id": 19, 
+            "title": "גבעת שמואל"
         }
-    },
+    }, 
     {
         "geometry": {
-            "type": "Point",
+            "type": "Point", 
             "coordinates": [
-                34.871328,
-                32.18478
-            ]
-        },
-        "properties": {
-            "title": "רעננה",
-            "id": 10
-        }
-    },
-    {
-        "geometry": {
-            "type": "Point",
-            "coordinates": [
-                34.80705,
-                31.961544
-            ]
-        },
-        "properties": {
-            "title": "ראשון לציון",
-            "id": 7
-        }
-    },
-    {
-        "geometry": {
-            "type": "Point",
-            "coordinates": [
-                35.213711,
-                31.768318
-            ]
-        },
-        "properties": {
-            "title": "ירושלים",
-            "id": 2
-        }
-    },
-    {
-        "geometry": {
-            "type": "Point",
-            "coordinates": [
-                34.808873,
+                34.808873, 
                 32.072175
             ]
-        },
+        }, 
         "properties": {
-            "title": "גבעתיים",
-            "id": 16
+            "id": 18, 
+            "title": "גבעתיים"
         }
-    },
+    }, 
     {
         "geometry": {
-            "type": "Point",
+            "type": "Point", 
             "coordinates": [
-                34.811274,
-                31.89277199999999
+                34.893597, 
+                32.155693
             ]
-        },
+        }, 
         "properties": {
-            "title": "רחובות",
-            "id": 15
+            "id": 27, 
+            "title": "הוד השרון"
         }
-    },
+    }, 
     {
         "geometry": {
-            "type": "Point",
+            "type": "Point", 
             "coordinates": [
-                34.887764,
-                32.08404
-            ]
-        },
-        "properties": {
-            "title": "פתח תקווה",
-            "id": 13
-        }
-    },
-    {
-        "geometry": {
-            "type": "Point",
-            "coordinates": [
-                34.853197,
-                32.321457
-            ]
-        },
-        "properties": {
-            "title": "נתניה",
-            "id": 9
-        }
-    },
-    {
-        "geometry": {
-            "type": "Point",
-            "coordinates": [
-                34.844677,
+                34.844677, 
                 32.162412
             ]
-        },
+        }, 
         "properties": {
-            "title": "הרצליה",
-            "id": 12
+            "id": 13, 
+            "title": "הרצליה"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.92088, 
+                32.442784
+            ]
+        }, 
+        "properties": {
+            "id": 14, 
+            "title": "חדרה"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.787386, 
+                32.015832
+            ]
+        }, 
+        "properties": {
+            "id": 4, 
+            "title": "חולון"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.974339, 
+                32.83036
+            ]
+        }, 
+        "properties": {
+            "id": 5, 
+            "title": "חיפה"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                35.530975, 
+                32.795858
+            ]
+        }, 
+        "properties": {
+            "id": 33, 
+            "title": "טבריה"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.972982, 
+                32.762126
+            ]
+        }, 
+        "properties": {
+            "id": 38, 
+            "title": "טירת כרמל"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.73945, 
+                31.877957
+            ]
+        }, 
+        "properties": {
+            "id": 26, 
+            "title": "יבנה"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.879581, 
+                32.029337
+            ]
+        }, 
+        "properties": {
+            "id": 35, 
+            "title": "יהוד"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                35.104608, 
+                32.660224
+            ]
+        }, 
+        "properties": {
+            "id": 39, 
+            "title": "יקנעם"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                35.213711, 
+                31.768318
+            ]
+        }, 
+        "properties": {
+            "id": 2, 
+            "title": "ירושלים"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.907612, 
+                32.178194
+            ]
+        }, 
+        "properties": {
+            "id": 7, 
+            "title": "כפר סבא"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                35.292418, 
+                32.91467
+            ]
+        }, 
+        "properties": {
+            "id": 34, 
+            "title": "כרמיאל"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                35.243446, 
+                32.6735
+            ]
+        }, 
+        "properties": {
+            "id": 43, 
+            "title": "מגדל העמק"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                35.14246, 
+                31.661039
+            ]
+        }, 
+        "properties": {
+            "id": 8, 
+            "title": "מודיעין"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                35.297957, 
+                31.777368
+            ]
+        }, 
+        "properties": {
+            "id": 37, 
+            "title": "מעלה אדומים"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                35.094671, 
+                33.011351
+            ]
+        }, 
+        "properties": {
+            "id": 40, 
+            "title": "נהריה"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                35.303548, 
+                32.699634
+            ]
+        }, 
+        "properties": {
+            "id": 46, 
+            "title": "נצרת עלית"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.595255, 
+                31.423195
+            ]
+        }, 
+        "properties": {
+            "id": 28, 
+            "title": "נתיבות"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.853197, 
+                32.321457
+            ]
+        }, 
+        "properties": {
+            "id": 6, 
+            "title": "נתניה"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                35.08268, 
+                32.933051
+            ]
+        }, 
+        "properties": {
+            "id": 11, 
+            "title": "עכו"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.887764, 
+                32.08404
+            ]
+        }, 
+        "properties": {
+            "id": 10, 
+            "title": "פתח תקווה"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                35.495999, 
+                32.964647
+            ]
+        }, 
+        "properties": {
+            "id": 48, 
+            "title": "צפת"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.858859, 
+                32.054862
+            ]
+        }, 
+        "properties": {
+            "id": 22, 
+            "title": "קרית אונו"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                35.079525, 
+                32.838201
+            ]
+        }, 
+        "properties": {
+            "id": 31, 
+            "title": "קרית מוצקין"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.746997, 
+                31.730201
+            ]
+        }, 
+        "properties": {
+            "id": 36, 
+            "title": "קרית מלאכי"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                35.570247, 
+                33.207932
+            ]
+        }, 
+        "properties": {
+            "id": 42, 
+            "title": "קרית שמונה"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.952179, 
+                32.095837
+            ]
+        }, 
+        "properties": {
+            "id": 12, 
+            "title": "ראש העין"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.80705, 
+                31.961544
+            ]
+        }, 
+        "properties": {
+            "id": 1, 
+            "title": "ראשון לציון"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.811274, 
+                31.892772
+            ]
+        }, 
+        "properties": {
+            "id": 17, 
+            "title": "רחובות"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.87294, 
+                31.931565
+            ]
+        }, 
+        "properties": {
+            "id": 24, 
+            "title": "רמלה"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.824787, 
+                32.068423
+            ]
+        }, 
+        "properties": {
+            "id": 20, 
+            "title": "רמת גן"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.84028, 
+                32.137792
+            ]
+        }, 
+        "properties": {
+            "id": 32, 
+            "title": "רמת השרון"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.871328, 
+                32.18478
+            ]
+        }, 
+        "properties": {
+            "id": 9, 
+            "title": "רעננה"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.595582, 
+                31.522693
+            ]
+        }, 
+        "properties": {
+            "id": 41, 
+            "title": "שדרות"
+        }
+    }, 
+    {
+        "geometry": {
+            "type": "Point", 
+            "coordinates": [
+                34.777821, 
+                32.066157
+            ]
+        }, 
+        "properties": {
+            "id": 3, 
+            "title": "תל אביב-יפו"
         }
     }
 ]
