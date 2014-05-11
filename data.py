@@ -2,6 +2,12 @@ import csv
 import json
 import re
 
+def def_float(v):
+    try:
+        return float(v)
+    except ValueError:
+        return float(1)
+
 city_data = []
 criteria_data = []
 
@@ -20,7 +26,6 @@ with open('data.csv', 'r') as f:
     categories = [cat for cat in data[0] if cat]
 
     criteria_counts = [6, 8, 4, 3, 7, 3, 3, 6, 5, 3, 4, 7, 2, 6, 2, 1, 6, 4, 1, 3, 3, 3, 1, 6, 4]
-
 
     cur_cat = None
     cur_fields = []
@@ -43,7 +48,7 @@ with open('data.csv', 'r') as f:
 
     for row in data[2:]:
         cells = row
-        website = cells[0]
+        id = int(cells[0])
         city = unicode(cells[1].decode('utf-8')).encode('utf-8')
         values = cells[2:]
 
@@ -51,14 +56,14 @@ with open('data.csv', 'r') as f:
 
         count = 0
         for c in criteria_counts:
-            row_data.append([float(v) for v in values[count:count + c]])
+            row_data.append([def_float(v) for v in values[count:count + c]])
             count += c
 
         city_data.append({
             'name': city,
-            'id': city_meta[city]['id'],
+            'id': id,
             'coordinates': city_meta[city]['coordinates'],
-            'website': website,
+            # 'website': website,
             'data': row_data
         })
 
