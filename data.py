@@ -6,7 +6,7 @@ def def_float(v):
     try:
         return float(v)
     except ValueError:
-        return float(1)
+        return str(v)
 
 city_data = []
 criteria_data = []
