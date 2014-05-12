@@ -7993,14 +7993,26 @@ $ ->
                     !isNaN(n))
 
         _sum: (scores) ->
-            return _.reduce(scores, (memo, score) ->
-                return memo + score)
+            scores = @_filterScores(scores)
+            if scores.length > 0
+                return _.reduce(scores, (memo, score) ->
+                    return memo + score)
+            else
+                return 0
 
         _average: (scores) ->
-            return @_sum(scores) / scores.length
+            scores = @_filterScores(scores)
+            if scores
+                return @_sum(scores) / scores.length
+            else
+                return 0
 
         _percentify: (score) ->
             return Math.round(score * 100.0)
+
+        _filterScores: (scores) ->
+            return _.filter(scores, (score) ->
+                return !isNaN(score))
 
         categoryScores: (category) ->
             return @get('data')[category]
@@ -8021,13 +8033,29 @@ $ ->
             return @_percentify(@totalAverage())
 
         totalMax: ->
-            return @_sum(_.map(@get('data'), (d) -> return d.length))
+            return @_sum(_.map(_.map(@get('data'), @_filterScores), (d) -> return d.length))
 
         score: (category, criteria) ->
             return @get('data')[category][criteria]
 
         grade: (category, criteria) ->
-            return scoreClassScale(@score(category, criteria)).toUpperCase()
+            scale = scoreClassScale(@score(category, criteria))
+            if !scale
+                return @score(category, criteria)
+            else
+                return scale.toUpperCase()
+
+        getScoreClassScale: (score) ->
+            class = scoreClassScale(score)
+            if !class
+                class = score
+            return class
+
+        getScoreColorScale: (score) ->
+            color = scoreColorScale(score)
+            if !color
+                color = '#eeeeee'
+            return color
 
         marker: (category, criteria) ->
             m = {
@@ -8045,30 +8073,30 @@ $ ->
             props = m['properties']
             if @_isInt(criteria) and @_isInt(category)
                 props['score'] = @score(category, criteria)
-                props['scoreclass'] = scoreClassScale(props['score'])
+                props['scoreclass'] = @getScoreClassScale(props['score'])
                 props['prettyscore'] = props['scoreclass'].toUpperCase()
                 props['description'] = root.guide[category]['fields'][criteria]
-                props['marker-color'] = scoreColorScale(props['score'])
-                props['marker-symbol'] = scoreClassScale(props['score'])
+                props['marker-color'] = @getScoreColorScale(props['score'])
+                props['marker-symbol'] = @getScoreClassScale(props['score'])
                 props['data-category'] = category
                 props['data-criteria'] = criteria
 
             else if @_isInt(category)
                 props['score'] = @categoryAverage(category)
-                props['scoreclass'] = scoreClassScale(props['score'])
+                props['scoreclass'] = @getScoreClassScale(props['score'])
                 props['prettyscore'] = @categoryAveragePercent(category) + '%'
                 props['description'] = root.guide[category]['category']
-                props['marker-color'] = scoreColorScale(props['score'])
-                props['marker-symbol'] = scoreClassScale(props['score'])
+                props['marker-color'] = @getScoreColorScale(props['score'])
+                props['marker-symbol'] = @getScoreClassScale(props['score'])
                 props['data-category'] = category
 
             else # show overall score
                 props['score'] = @totalAverage()
-                props['scoreclass'] = scoreClassScale(props['score'])
+                props['scoreclass'] = @getScoreClassScale(props['score'])
                 props['prettyscore'] = @totalAveragePercent() + '%'
                 props['description'] = "ציון כולל"
-                props['marker-color'] = scoreColorScale(props['score'])
-                props['marker-symbol'] = scoreClassScale(props['score'])
+                props['marker-color'] = @getScoreColorScale(props['score'])
+                props['marker-symbol'] = @getScoreClassScale(props['score'])
                 props['data-category'] = category
 
             return m
