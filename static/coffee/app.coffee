@@ -8002,12 +8002,14 @@ $ ->
 
         _average: (scores) ->
             scores = @_filterScores(scores)
-            if scores
+            if scores.length > 0
                 return @_sum(scores) / scores.length
             else
-                return 0
+                return 'X'
 
         _percentify: (score) ->
+            if isNaN(score)
+                return score
             return Math.round(score * 100.0)
 
         _filterScores: (scores) ->
@@ -8039,22 +8041,29 @@ $ ->
             return @get('data')[category][criteria]
 
         grade: (category, criteria) ->
-            scale = scoreClassScale(@score(category, criteria))
-            if !scale
-                return @score(category, criteria)
-            else
-                return scale.toUpperCase()
+            score = @score(category, criteria)
+            cls = @getScoreClassScale(score)
+            if score == '-' or score == '+' or score == 'X'
+                cls = score
+            return cls
+
 
         getScoreClassScale: (score) ->
-            class = scoreClassScale(score)
-            if !class
-                class = score
-            return class
+            cls = scoreClassScale(score)
+            if !cls?
+                cls = switch
+                    when score == '-' then 'c'
+                    when score == '+' then 'a'
+                    when score == 'X' then 'u'
+            return cls
 
         getScoreColorScale: (score) ->
             color = scoreColorScale(score)
-            if !color
-                color = '#eeeeee'
+            if !color?
+                color = switch
+                    when score == '-' then '#DA4F49'
+                    when score == '+' then '#51A351'
+                    when score == 'X' then '#999999'
             return color
 
         marker: (category, criteria) ->
@@ -8084,7 +8093,8 @@ $ ->
             else if @_isInt(category)
                 props['score'] = @categoryAverage(category)
                 props['scoreclass'] = @getScoreClassScale(props['score'])
-                props['prettyscore'] = @categoryAveragePercent(category) + '%'
+                cap = @categoryAveragePercent(category)
+                props['prettyscore'] = if isNaN(cap) then cap else cap + '%'
                 props['description'] = root.guide[category]['category']
                 props['marker-color'] = @getScoreColorScale(props['score'])
                 props['marker-symbol'] = @getScoreClassScale(props['score'])

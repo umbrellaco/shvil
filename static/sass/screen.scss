@@ -67,6 +67,8 @@ $color-red: #DA4F49;
 $color-red-highlight: #EE5F5B;
 $color-green: #51A351;
 $color-green-highlight: #62C462;
+$color-gray: #999999;
+$color-gray-highlight: #BBBBBB;
 
 $color-primary: $color-blue;
 $color-text: #444;
@@ -83,6 +85,9 @@ $map-width: 400px;
     }
     &.C, &.c {
         background: $color-red;
+    }
+    &.U, &.u {
+        background: $color-gray;
     }
 }
 
