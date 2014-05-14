@@ -7977,7 +7977,7 @@ israelExtent = new MM.Extent(33.6006300456776,   # north
                              36.1) # east
 
 # Map Centerpoint for Israel
-israelCenter = {lat: 31.637766370126315, lon: 34.99999999999998}
+israelCenter = {lat: 31.93776, lon: 34.99998}
 
 _.templateSettings = {
   interpolate : /\{\{(.+?)\}\}/g
