@@ -8056,6 +8056,12 @@ $ ->
                     when score == 'X' then 'x'
             return cls
 
+        getPrettyScore: (score) ->
+            prettyscore = @getScoreClassScale(score).toUpperCase()
+            if score == '-' or score == '+' or score == 'X'
+                prettyscore = score
+            return prettyscore
+
         getScoreColorScale: (score) ->
             color = scoreColorScale(score)
             if !color?
@@ -8088,7 +8094,7 @@ $ ->
             if @_isInt(criteria) and @_isInt(category)
                 props['score'] = @score(category, criteria)
                 props['scoreclass'] = @getScoreClassScale(props['score'])
-                props['prettyscore'] = props['scoreclass'].toUpperCase()
+                props['prettyscore'] = @getPrettyScore(props['score'])
                 props['description'] = root.guide[category]['fields'][criteria]
                 props['marker-color'] = @getScoreColorScale(props['score'])
                 props['marker-symbol'] = @getScoreClassScale(props['score'])
