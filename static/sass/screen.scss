@@ -77,13 +77,13 @@ $color-text-light: #bbb;
 $map-width: 400px;
 
 @mixin graded() {
-    &.A, &.a {
+    &.A, &.a, &.\+ {
         background: $color-green;
     }
     &.B, &.b {
         background: $color-yellow;
     }
-    &.C, &.c {
+    &.C, &.c, &.\- {
         background: $color-red;
     }
     &.U, &.u, &.X, &.x {

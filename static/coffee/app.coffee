@@ -8045,7 +8045,7 @@ $ ->
             cls = @getScoreClassScale(score)
             if score == '-' or score == '+' or score == 'X'
                 cls = score
-            return cls
+            return cls.toUpperCase()
 
 
         getScoreClassScale: (score) ->
