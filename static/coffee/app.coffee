@@ -8119,6 +8119,9 @@ $ ->
     class Cities extends Backbone.Collection
         model: City
 
+        comparator: (city) ->
+          return -city.totalAverage()
+
 
     class MapView extends Backbone.View
         el: $('#map')
