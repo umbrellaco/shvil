@@ -8047,14 +8047,13 @@ $ ->
                 cls = score
             return cls.toUpperCase()
 
-
         getScoreClassScale: (score) ->
             cls = scoreClassScale(score)
             if !cls?
                 cls = switch
                     when score == '-' then 'c'
                     when score == '+' then 'a'
-                    when score == 'X' then 'u'
+                    when score == 'X' then 'x'
             return cls
 
         getScoreColorScale: (score) ->
@@ -8065,6 +8064,12 @@ $ ->
                     when score == '+' then '#51A351'
                     when score == 'X' then '#999999'
             return color
+
+        getCategoryAveragePercent: (category) ->
+            percentage = @categoryAveragePercent(category)
+            if !isNaN(percentage)
+                percentage += '%'
+            return percentage
 
         marker: (category, criteria) ->
             m = {
@@ -8245,9 +8250,9 @@ $ ->
                 $cat = $(@categoryTemplate({
                         category: i,
                         name: root.guide[i]['category'],
-                        percentage: @model.categoryAveragePercent(i)
+                        percentage: @model.getCategoryAveragePercent(i)
                         score: @model.categoryAverage(i)
-                        grade: scoreClassScale(@model.categoryAverage(i))
+                        grade: @model.getScoreClassScale(@model.categoryAverage(i))
                     }))
                 for criteria, j in category
                     crit = @criteriaTemplate({
@@ -8255,7 +8260,7 @@ $ ->
                         criteria: j,
                         name: root.guide[i]['fields'][j],
                         grade: @model.grade(i, j)
-                        })
+                    })
                     $cat.children('.criteria-list').append(crit)
                 @$el.append($cat)
 
@@ -8313,7 +8318,6 @@ $ ->
             @mapView.setCriteria()
             cv = new CityView({model: cities.get(id)})
             $('#info').html(cv.render().el)
-
 
 
     root.App = new TransparencyMap()
