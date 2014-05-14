@@ -8093,8 +8093,7 @@ $ ->
             else if @_isInt(category)
                 props['score'] = @categoryAverage(category)
                 props['scoreclass'] = @getScoreClassScale(props['score'])
-                cap = @categoryAveragePercent(category)
-                props['prettyscore'] = if isNaN(cap) then cap else cap + '%'
+                props['prettyscore'] = @categoryAveragePercent(category)
                 props['description'] = root.guide[category]['category']
                 props['marker-color'] = @getScoreColorScale(props['score'])
                 props['marker-symbol'] = @getScoreClassScale(props['score'])
